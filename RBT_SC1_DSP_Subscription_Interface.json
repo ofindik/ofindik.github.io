@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "RBT SC2 DSP Subscriber Interface",
-    "description": "This document provides the RESTful subscriber interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
+    "title": "RBT SC1 DSP Subscription Interface",
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
     "version": "v1"
   },
   "servers": [
@@ -12,20 +12,23 @@
   ],
   "tags": [
     {
-      "name": "SC2",
-      "description": "Operations for RBT Service Contract 2"
+      "name": "SC1",
+      "description": "Operations for RBT Service Contract 1"
     }
   ],
   "paths": {
-    "/rbt/v1/subscribers": {
+    "/rbt/v1/serviceOfferSubscriptions": {
       "get": {
         "tags": [
-          "SC2"
+          "SC1"
         ],
-        "summary": "Queries the subscriber",
-        "description": "This method is used to query a subscriber identified with {msisdn}.",
-        "operationId": "querySubscriber",
+        "summary": "Queries the service offer subscriptions",
+        "description": "This method is used to query all service offer subscriptions of a subscriber identified with {san}. Service offer details can be retrieved with \"GetOffer\" method of SC3.",
+        "operationId": "queryServiceOfferSubscriptions",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
           {
             "$ref": "#/components/parameters/msisdnParam"
           },
@@ -34,15 +37,18 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
           }
         ],
         "responses": {
           "200": {
-            "description": "Subscriber is Retrieved",
+            "description": "Service Offer Subscriptions are Retrieved",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Subscriber"
+                  "$ref": "#/components/schemas/ServiceOfferSubscriptions"
                 }
               }
             }
@@ -78,49 +84,52 @@
   },
   "components": {
     "schemas": {
-      "Subscriber": {
+      "ServiceOfferSubscriptions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ServiceOfferSubscription"
+        }
+      },
+      "ServiceOfferSubscription": {
         "required": [
-          "customerName",
-          "imsi",
-          "language",
-          "msisdn",
-          "paymentType",
-          "san",
-          "state"
+          "subscriptionId",
+          "offerId",
+          "offerName",
+          "state",
+          "isGift"
         ],
         "type": "object",
         "properties": {
-          "msisdn": {
+          "subscriptionId": {
             "type": "string",
-            "description": "MSISDN of the subscriber",
-            "example": "966564051757"
+            "description": "Identifier of the service offer subscription",
+            "example": "10001"
           },
-          "san": {
+          "offerId": {
             "type": "string",
-            "description": "Subscriber Account Number",
-            "example": "1001236563194353"
+            "description": "Identifier of the service offer",
+            "example": "20001"
           },
-          "language": {
+          "offerName": {
             "type": "string",
-            "description": "Possible values are:\n  - EN\n  - AR"
+            "description": "Possible values are:\n  - RBT\n  - PrayerTimes\n  - ProfileService\n  - MySignature"
           },
           "state": {
             "type": "string",
-            "description": "Possible values are:\n  - ACTIVE\n  - INACTIVE"
+            "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive"
           },
-          "paymentType": {
-            "type": "string",
-            "description": "Possible values are:\n  - Prepaid\n  - Postpaid"
+          "isGift": {
+            "type": "boolean",
+            "description": "Flag identifiying the gift status of service offer subscription. If \"isGift\" is true, \"giftReceiver\" and \"paymentShape\" information will be returned."
           },
-          "customerName": {
+          "giftReceiver": {
             "type": "string",
-            "description": "Name of the subscriber",
-            "example": "Osman Fındık"
+            "description": "MSISDN of the gift receiver.",
+            "example": "966561234567"
           },
-          "imsi": {
+          "giftPaymentShape": {
             "type": "string",
-            "description": "IMSI of the subscriber",
-            "example": "420032332534811"
+            "description": "Possible values are:\n  - All\n  - Initial"
           }
         }
       },
@@ -138,10 +147,19 @@
             "type": "string"
           }
         },
-        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 9000 - System failure. Details: \"Error detail\"."
+        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 1004 - Subscription does not exist.\n  - 9000 - System failure. Details: \"Error detail\"."
       }
     },
     "parameters": {
+      "sanParam": {
+        "name": "X-San",
+        "in": "header",
+        "description": "Service Account Number of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "msisdnParam": {
         "name": "X-Msisdn",
         "in": "header",
