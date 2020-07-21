@@ -1,0 +1,808 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RBT SC1 DSP Subscription Interface",
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "SC1",
+      "description": "Operations for RBT Service Contract 1"
+    }
+  ],
+  "paths": {
+    "/rbt/v1/serviceOfferSubscriptions": {
+      "get": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Queries the service offer subscriptions",
+        "description": "This method is used to query all service offer subscriptions of a subscriber identified with {san}. Service offer details can be retrieved with methods of SC3.",
+        "operationId": "queryServiceOfferSubscriptions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Offer Subscriptions are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceOfferSubscriptions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Initiates a new service offer subscription.",
+        "description": "This method is used to initiate a new service offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
+        "operationId": "newServiceOfferSubscription",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceOffer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "New Service Offer Subscription is Initiated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/serviceOfferSubscriptions/{subscriptionId}/state": {
+      "put": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Updates a service offer subscription.",
+        "description": "This method is used to update a service offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
+        "operationId": "updateServiceOfferSubscription",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Status"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service Offer Subscription is Updated"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/contentOfferSubscriptions": {
+      "get": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Queries the content offer subscriptions",
+        "description": "This method is used to query all content offer subscriptions of a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
+        "operationId": "queryContentOfferSubscriptions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content Offer Subscriptions are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentOfferSubscriptions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Initiates a new content offer subscription.",
+        "description": "This method is used to initiate a new content offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
+        "operationId": "newContentOfferSubscription",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentOffer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "New Content Offer Subscription is Initiated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/contentOfferSubscriptions/{subscriptionId}/state": {
+      "put": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Updates a content offer subscription.",
+        "description": "This method is used to update a content offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
+        "operationId": "updateContentOfferSubscription",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Status"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Content Offer Subscription is Updated"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/confirmations": {
+      "put": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Returns the result of confirmation.",
+        "description": "This method is used to return the result of \"GetConfirmationFromUser\" method.",
+        "operationId": "returnConfirmationResult",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmationResult"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Confirmation Result is Returned."
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ServiceOfferSubscriptions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ServiceOfferSubscription"
+        }
+      },
+      "ServiceOfferSubscription": {
+        "required": [
+          "subscriptionId",
+          "offerId",
+          "offerName",
+          "state",
+          "isGift"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "Identifier of the subscription",
+            "example": "10001"
+          },
+          "offerId": {
+            "type": "string",
+            "description": "Identifier of the service offer",
+            "example": "20001"
+          },
+          "offerName": {
+            "type": "string",
+            "description": "Possible values are:\n  - RBT\n  - PrayerTimes\n  - ProfileService\n  - MySignature",
+            "example": "PrayerTimes"
+          },
+          "state": {
+            "type": "string",
+            "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
+            "example": "Active"
+          },
+          "isGift": {
+            "type": "boolean",
+            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftReceiver\" and \"paymentShape\" information will be returned."
+          },
+          "giftReceiver": {
+            "type": "string",
+            "description": "MSISDN of the gift receiver.",
+            "example": "966561234567"
+          },
+          "giftPaymentShape": {
+            "type": "string",
+            "description": "Possible values are:\n  - All\n  - Initial",
+            "example": "All"
+          }
+        }
+      },
+      "ServiceOffer": {
+        "required": [
+          "offerId",
+          "language"
+        ],
+        "type": "object",
+        "properties": {
+          "offerId": {
+            "type": "string",
+            "description": "Identifier of the service offer",
+            "example": "20001"
+          },
+          "language": {
+            "type": "string",
+            "description": "Possible values are:\n  - EN\n  - AR",
+            "example": "EN"
+          },
+          "isGift": {
+            "type": "boolean",
+            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftReceiver\" and \"paymentShape\" information will be returned."
+          },
+          "giftReceiver": {
+            "type": "string",
+            "description": "MSISDN of the gift receiver.",
+            "example": "966561234567"
+          },
+          "giftPaymentShape": {
+            "type": "string",
+            "description": "Possible values are:\n  - All\n  - Initial",
+            "example": "All"
+          }
+        }
+      },
+      "SubscriptionId": {
+        "required": [
+          "subscriptionId"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "Identifier of the subscription.",
+            "example": "10001"
+          }
+        }
+      },
+      "Status": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Possible values are:\n  - Suspend\n  - Unsuspend\n  - Activate\n  - Inactivate",
+            "example": "Suspend"
+          }
+        }
+      },
+      "ContentOfferSubscriptions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ContentOfferSubscription"
+        }
+      },
+      "ContentOfferSubscription": {
+        "required": [
+          "subscriptionId",
+          "contentId",
+          "contentName",
+          "subscriptionType",
+          "state",
+          "isGift"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "Identifier of the subscription",
+            "example": "10002"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "Identifier of the content",
+            "example": "40001"
+          },
+          "contentName": {
+            "type": "string",
+            "description": "Name of the content",
+            "example": "Tone A"
+          },
+          "subscriptionType": {
+            "type": "string",
+            "description": "Possible values are:\n  - Tone\n  - Artist\n  - Category\n  - Mood\n  - SubscriptionList",
+            "example": "Tone"
+          },
+          "state": {
+            "type": "string",
+            "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
+            "example": "Active"
+          },
+          "isGift": {
+            "type": "boolean",
+            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftReceiver\" and \"paymentShape\" information will be returned."
+          },
+          "giftReceiver": {
+            "type": "string",
+            "description": "MSISDN of the gift receiver.",
+            "example": "966561234567"
+          },
+          "giftPaymentShape": {
+            "type": "string",
+            "description": "Possible values are:\n  - All\n  - Initial",
+            "example": "All"
+          }
+        }
+      },
+      "ContentOffer": {
+        "required": [
+          "contentId",
+          "subscriptionType",
+          "language"
+        ],
+        "type": "object",
+        "properties": {
+          "contentId": {
+            "type": "string",
+            "description": "Identifier of the content",
+            "example": "40001"
+          },
+          "subscriptionType": {
+            "type": "string",
+            "description": "Possible values are:\n  - Tone\n  - Artist\n  - Category\n  - Mood\n  - SubscriptionList",
+            "example": "Tone"
+          },
+          "language": {
+            "type": "string",
+            "description": "Possible values are:\n  - EN\n  - AR",
+            "example": "EN"
+          },
+          "isGift": {
+            "type": "boolean",
+            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftReceiver\" and \"paymentShape\" information will be returned."
+          },
+          "giftReceiver": {
+            "type": "string",
+            "description": "MSISDN of the gift receiver.",
+            "example": "966561234567"
+          },
+          "giftPaymentShape": {
+            "type": "string",
+            "description": "Possible values are:\n  - All\n  - Initial",
+            "example": "All"
+          }
+        }
+      },
+      "ConfirmationResult": {
+        "required": [
+          "result",
+          "userText",
+          "confirmationId"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string",
+            "description": "Possible values are:\n  - Confirmed\n  - Denied",
+            "example": "Confirmed"
+          },
+          "userText": {
+            "type": "string",
+            "description": "User selection for the confirmation.",
+            "example": "Yes"
+          },
+          "confirmationId": {
+            "type": "string",
+            "description": "Identifier of the confirmation request.",
+            "example": "1111"
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "errorCode",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 1004 - Subscription does not exist.\n  - 9000 - System failure. Details: \"Error detail\"."
+      }
+    },
+    "parameters": {
+      "sanParam": {
+        "name": "X-San",
+        "in": "header",
+        "description": "Service Account Number of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "msisdnParam": {
+        "name": "X-Msisdn",
+        "in": "header",
+        "description": "MSISDN of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "channelParam": {
+        "name": "X-Channel",
+        "in": "header",
+        "description": "This parameter is used to track the channel of the request. Possible values are;\n  - IVR\n  - USSD\n  - SMS\n  - RBTMobileApp\n  - RBTSubscriberPortal\n  - MobilyMobileApp\n  - MobilyEPortal\n  - OTHER",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "usernameParam": {
+        "name": "X-Username",
+        "in": "header",
+        "description": "This parameter is used to track the user of the API; log purposes only. Maximum length can be 128 chars.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "transactionIdParam": {
+        "name": "X-TransactionId",
+        "in": "header",
+        "description": "This parameter is used to track the API method transaction; log purposes only. It is meaningful for POST and PUT methods; in RBT APIs. Maximum length can be 128 chars.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "subscriptionIdParam": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "Identifier of the subscription",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "basic_security": {
+        "type": "http",
+        "description": "Basic Authentication",
+        "scheme": "basic"
+      }
+    }
+  }
+}
