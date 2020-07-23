@@ -22,7 +22,7 @@
         "tags": [
           "SC2"
         ],
-        "summary": "Queries the subscriber",
+        "summary": "Queries a subscriber",
         "description": "This method is used to query a subscriber identified with {msisdn}.",
         "operationId": "querySubscriber",
         "parameters": [
@@ -102,20 +102,23 @@
           },
           "language": {
             "type": "string",
-            "description": "Possible values are:\n  - EN\n  - AR"
+            "description": "Possible values are:\n  - EN\n  - AR",
+            "example": "EN"
           },
           "state": {
             "type": "string",
-            "description": "Possible values are:\n  - ACTIVE\n  - INACTIVE"
+            "description": "Possible values are:\n  - ACTIVE\n  - INACTIVE",
+            "example": "ACTIVE"
           },
           "paymentType": {
             "type": "string",
-            "description": "Possible values are:\n  - Prepaid\n  - Postpaid"
+            "description": "Possible values are:\n  - Prepaid\n  - Postpaid",
+            "example": "Prepaid"
           },
           "customerName": {
             "type": "string",
             "description": "Name of the subscriber",
-            "example": "Osman Fındık"
+            "example": "Customer Name"
           },
           "imsi": {
             "type": "string",
@@ -163,14 +166,6 @@
         "name": "X-Username",
         "in": "header",
         "description": "This parameter is used to track the user of the API; log purposes only. Maximum length can be 128 chars.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "transactionIdParam": {
-        "name": "X-TransactionId",
-        "in": "header",
-        "description": "This parameter is used to track the API method transaction; log purposes only. It is meaningful for POST and PUT methods; in RBT APIs. Maximum length can be 128 chars.",
         "schema": {
           "type": "string"
         }

@@ -1,0 +1,1474 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RBT SC4 DSP Content Interface",
+    "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "SC4",
+      "description": "Operations for RBT Service Contract 4"
+    }
+  ],
+  "paths": {
+    "/rbt/v1/tones": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries the tones matching to the key param",
+        "description": "This method is used to query tones matching to the {key} parameter.",
+        "operationId": "queryTones",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/keyParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tones are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tones"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/tones/{toneId}": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries a tone",
+        "description": "This method is used to query a tone identified by {toneId}.",
+        "operationId": "queryTone",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/toneIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tone is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToneDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/tones/{toneId}/content": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries a tone content",
+        "description": "This method is used to query a tone content identified by {toneId}.",
+        "operationId": "queryToneContent",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/toneIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tone Content is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToneContent"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/artists": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries the artists matching to the key param",
+        "description": "This method is used to query artists matching to the {key} parameter.",
+        "operationId": "queryArtists",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/keyParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artists are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artists"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/artists/{artistId}": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries an artist",
+        "description": "This method is used to query an artist identified by {artistId}.",
+        "operationId": "queryArtist",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/artistIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tone is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/subscriptionLists": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries the subscriptionLists matching to the key param",
+        "description": "This method is used to query subscriptionLists matching to the {key} parameter.",
+        "operationId": "querySubscriptionLists",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/keyParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SubscriptionLists are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionLists"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/subscriptionLists/{subscriptionListId}": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries a subscriptionList",
+        "description": "This method is used to query a subscriptionList identified by {artistId}.",
+        "operationId": "querySubscriptionList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionListIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SubscriptionList is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionListDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/categories": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries all categories",
+        "description": "This method is used to query all categories.",
+        "operationId": "queryCategories",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Categories are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categories"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/categories/{categoryId}": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries a category",
+        "description": "This method is used to query a category identified by {categoryId}.",
+        "operationId": "queryCategory",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/categoryIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/moods": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries all moods",
+        "description": "This method is used to query all moods.",
+        "operationId": "queryMoods",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Moods are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Moods"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/moods/{moodId}": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries a mood",
+        "description": "This method is used to query a mood identified by {moodId}.",
+        "operationId": "queryMood",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/moodIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mood is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MoodDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/trending/tones": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries trending tones",
+        "description": "This method is used to query trending tones. Top 5 tones with more than 100 subscriptions within one week.",
+        "operationId": "queryTrendingTones",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TrendingTones are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tones"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/promoted/tones": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries promoted tones",
+        "description": "This method is used to query promoted tones. Promoted tones are marked on Content Management System.",
+        "operationId": "queryPromotedTones",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "PromotedTones are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tones"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/promoted/artists": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries promoted artists",
+        "description": "This method is used to query promoted artists. Promoted artists are marked on Content Management System.",
+        "operationId": "queryPromotedArtists",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "PromotedArtists are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artists"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/promoted/subscriptionLists": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries promoted subscriptionLists",
+        "description": "This method is used to query promoted subscriptionLists. Promoted subscriptionLists are marked on Content Management System.",
+        "operationId": "queryPromotedSubscriptionLists",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "PromotedSubscriptionLists are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionLists"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Tones": {
+        "required": [
+          "tones"
+        ],
+        "type": "object",
+        "properties": {
+          "tones": {
+            "$ref": "#/components/schemas/ToneArray"
+          }
+        }
+      },
+      "ToneArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Tone"
+        }
+      },
+      "Tone": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the tone",
+            "example": "1111"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the tone",
+            "example": "Tone A"
+          }
+        }
+      },
+      "Artists": {
+        "required": [
+          "artists"
+        ],
+        "type": "object",
+        "properties": {
+          "tones": {
+            "$ref": "#/components/schemas/ArtistArray"
+          }
+        }
+      },
+      "ArtistArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Artist"
+        }
+      },
+      "Artist": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the artist",
+            "example": "3333"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the artist",
+            "example": "Artist A"
+          }
+        }
+      },
+      "SubscriptionLists": {
+        "required": [
+          "subscriptionLists"
+        ],
+        "type": "object",
+        "properties": {
+          "tones": {
+            "$ref": "#/components/schemas/SubscriptionListArray"
+          }
+        }
+      },
+      "SubscriptionListArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SubscriptionList"
+        }
+      },
+      "SubscriptionList": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the subscriptionList",
+            "example": "5555"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the subscriptionList",
+            "example": "Subscription List A"
+          }
+        }
+      },
+      "Categories": {
+        "required": [
+          "categories"
+        ],
+        "type": "object",
+        "properties": {
+          "tones": {
+            "$ref": "#/components/schemas/CategoryArray"
+          }
+        }
+      },
+      "CategoryArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Category"
+        }
+      },
+      "Category": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the category",
+            "example": "11001"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the category",
+            "example": "Category A"
+          }
+        }
+      },
+      "Moods": {
+        "required": [
+          "moods"
+        ],
+        "type": "object",
+        "properties": {
+          "tones": {
+            "$ref": "#/components/schemas/MoodArray"
+          }
+        }
+      },
+      "MoodArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Mood"
+        }
+      },
+      "Mood": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the mood",
+            "example": "22001"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the mood",
+            "example": "Mood A"
+          }
+        }
+      },
+      "ToneDetails": {
+        "required": [
+          "id",
+          "name",
+          "price",
+          "currentSubscriptions",
+          "totalSubscriptions",
+          "updateTime",
+          "playCount",
+          "thumbnail"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the tone",
+            "example": "1111"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the tone",
+            "example": "Tone A"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the tone",
+            "example": "5"
+          },
+          "currentSubscriptions": {
+            "type": "integer",
+            "description": "Active subscription count of the tone indicating popularity",
+            "example": "1000"
+          },
+          "totalSubscriptions": {
+            "type": "integer",
+            "description": "Total subscription count of the tone",
+            "example": "10000000"
+          },
+          "updateTime": {
+            "type": "integer",
+            "description": "Last update time of the tone in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "playCount": {
+            "type": "integer",
+            "description": "Play count of the tone",
+            "example": "2300000"
+          },
+          "thumbnail": {
+            "type": "integer",
+            "description": "Thumbnail of the tone in URL format",
+            "example": "http://<dsp_cms_vip>/xxxx"
+          }
+        }
+      },
+      "ArtistDetails": {
+        "required": [
+          "id",
+          "name",
+          "price",
+          "currentSubscriptions",
+          "totalSubscriptions",
+          "updateTime",
+          "playCount",
+          "thumbnail",
+          "tones"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the artist",
+            "example": "3333"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the artist",
+            "example": "Artist A"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the artist",
+            "example": "5"
+          },
+          "currentSubscriptions": {
+            "type": "integer",
+            "description": "Active subscription count of the artist indicating popularity",
+            "example": "1000"
+          },
+          "totalSubscriptions": {
+            "type": "integer",
+            "description": "Total subscription count of the artist",
+            "example": "10000000"
+          },
+          "updateTime": {
+            "type": "integer",
+            "description": "Last update time of the artist in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "playCount": {
+            "type": "integer",
+            "description": "Play count of the artist",
+            "example": "2300000"
+          },
+          "thumbnail": {
+            "type": "integer",
+            "description": "Thumbnail of the artist in URL format",
+            "example": "http://<dsp_cms_vip>/xxxx"
+          },
+          "tones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tone"
+            }
+          }
+        }
+      },
+      "SubscriptionListDetails": {
+        "required": [
+          "id",
+          "name",
+          "price",
+          "currentSubscriptions",
+          "totalSubscriptions",
+          "updateTime",
+          "playCount",
+          "thumbnail",
+          "tones"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the subscriptionList",
+            "example": "5555"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the subscriptionList",
+            "example": "Subscription List A"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the subscriptionList",
+            "example": "5"
+          },
+          "currentSubscriptions": {
+            "type": "integer",
+            "description": "Active subscription count of the subscriptionList indicating popularity",
+            "example": "1000"
+          },
+          "totalSubscriptions": {
+            "type": "integer",
+            "description": "Total subscription count of the subscriptionList",
+            "example": "10000000"
+          },
+          "updateTime": {
+            "type": "integer",
+            "description": "Last update time of the subscriptionList in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "playCount": {
+            "type": "integer",
+            "description": "Play count of the subscriptionList",
+            "example": "2300000"
+          },
+          "thumbnail": {
+            "type": "integer",
+            "description": "Thumbnail of the subscriptionList in URL format",
+            "example": "http://<dsp_cms_vip>/xxxx"
+          },
+          "tones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tone"
+            }
+          }
+        }
+      },
+      "CategoryDetails": {
+        "required": [
+          "id",
+          "name",
+          "price",
+          "currentSubscriptions",
+          "totalSubscriptions",
+          "updateTime",
+          "playCount",
+          "thumbnail",
+          "tones"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the category",
+            "example": "1001"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the category",
+            "example": "Category A"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the category",
+            "example": "5"
+          },
+          "currentSubscriptions": {
+            "type": "integer",
+            "description": "Active subscription count of the category indicating popularity",
+            "example": "1000"
+          },
+          "totalSubscriptions": {
+            "type": "integer",
+            "description": "Total subscription count of the category",
+            "example": "10000000"
+          },
+          "updateTime": {
+            "type": "integer",
+            "description": "Last update time of the category in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "playCount": {
+            "type": "integer",
+            "description": "Play count of the category",
+            "example": "2300000"
+          },
+          "thumbnail": {
+            "type": "integer",
+            "description": "Thumbnail of the category in URL format",
+            "example": "http://<dsp_cms_vip>/xxxx"
+          },
+          "tones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tone"
+            }
+          }
+        }
+      },
+      "MoodDetails": {
+        "required": [
+          "id",
+          "name",
+          "price",
+          "currentSubscriptions",
+          "totalSubscriptions",
+          "updateTime",
+          "playCount",
+          "thumbnail",
+          "tones"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the mood",
+            "example": "1001"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the mood",
+            "example": "Mood A"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the mood",
+            "example": "5"
+          },
+          "currentSubscriptions": {
+            "type": "integer",
+            "description": "Active subscription count of the mood indicating popularity",
+            "example": "1000"
+          },
+          "totalSubscriptions": {
+            "type": "integer",
+            "description": "Total subscription count of the mood",
+            "example": "10000000"
+          },
+          "updateTime": {
+            "type": "integer",
+            "description": "Last update time of the mood in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "playCount": {
+            "type": "integer",
+            "description": "Play count of the mood",
+            "example": "2300000"
+          },
+          "thumbnail": {
+            "type": "integer",
+            "description": "Thumbnail of the mood in URL format",
+            "example": "http://<dsp_cms_vip>/xxxx"
+          },
+          "tones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tone"
+            }
+          }
+        }
+      },
+      "ToneContent": {
+        "required": [
+          "format",
+          "file"
+        ],
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "description": "Format of the content",
+            "example": "Wav"
+          },
+          "file": {
+            "type": "string",
+            "format": "byte",
+            "description": "Base64-encoded tone content"
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "errorCode",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 9000 - System failure. Details: \"Error detail\"."
+      }
+    },
+    "parameters": {
+      "channelParam": {
+        "name": "X-Channel",
+        "in": "header",
+        "description": "This parameter is used to track the channel of the request. Possible values are;\n  - IVR\n  - USSD\n  - SMS\n  - RBTMobileApp\n  - RBTSubscriberPortal\n  - MobilyMobileApp\n  - MobilyEPortal\n  - OTHER",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "usernameParam": {
+        "name": "X-Username",
+        "in": "header",
+        "description": "This parameter is used to track the user of the API; log purposes only. Maximum length can be 128 chars.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "keyParam": {
+        "name": "key",
+        "in": "query",
+        "description": "Key of the tone query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "toneIdParam": {
+        "name": "toneId",
+        "in": "path",
+        "description": "Identifier of the tone",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "artistIdParam": {
+        "name": "artistId",
+        "in": "path",
+        "description": "Identifier of the artist",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "subscriptionListIdParam": {
+        "name": "subscriptionListId",
+        "in": "path",
+        "description": "Identifier of the subscriptionList",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "categoryIdParam": {
+        "name": "categoryId",
+        "in": "path",
+        "description": "Identifier of the category",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "moodIdParam": {
+        "name": "moodId",
+        "in": "path",
+        "description": "Identifier of the mood",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "basic_security": {
+        "type": "http",
+        "description": "Basic Authentication",
+        "scheme": "basic"
+      }
+    }
+  }
+}

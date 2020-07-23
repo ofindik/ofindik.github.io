@@ -115,7 +115,7 @@
         },
         "responses": {
           "200": {
-            "description": "New Service Offer Subscription is Initiated",
+            "description": "New Service Offer Subscription Request is Submitted",
             "content": {
               "application/json": {
                 "schema": {
@@ -191,7 +191,7 @@
         },
         "responses": {
           "200": {
-            "description": "Service Offer Subscription is Updated"
+            "description": "Update Service Offer Subscription Request is Submitted"
           },
           "400": {
             "description": "Bad Request",
@@ -319,7 +319,7 @@
         },
         "responses": {
           "200": {
-            "description": "New Content Offer Subscription is Initiated",
+            "description": "New Content Offer Subscription Request is Submitted",
             "content": {
               "application/json": {
                 "schema": {
@@ -395,7 +395,7 @@
         },
         "responses": {
           "200": {
-            "description": "Content Offer Subscription is Updated"
+            "description": "Update Content Offer Subscription Request is Submitted"
           },
           "400": {
             "description": "Bad Request",
@@ -461,7 +461,7 @@
         },
         "responses": {
           "200": {
-            "description": "Confirmation Result is Returned."
+            "description": "Confirmation Result is Returned"
           },
           "400": {
             "description": "Bad Request",
@@ -536,7 +536,7 @@
           },
           "giftReceiver": {
             "type": "string",
-            "description": "MSISDN of the gift receiver.",
+            "description": "MSISDN of the gift receiver",
             "example": "966561234567"
           },
           "giftPaymentShape": {
@@ -549,7 +549,8 @@
       "ServiceOffer": {
         "required": [
           "offerId",
-          "language"
+          "language",
+          "isGift"
         ],
         "type": "object",
         "properties": {
@@ -569,7 +570,7 @@
           },
           "giftReceiver": {
             "type": "string",
-            "description": "MSISDN of the gift receiver.",
+            "description": "MSISDN of the gift receiver",
             "example": "966561234567"
           },
           "giftPaymentShape": {
@@ -587,7 +588,7 @@
         "properties": {
           "subscriptionId": {
             "type": "string",
-            "description": "Identifier of the subscription.",
+            "description": "Identifier of the subscription",
             "example": "10001"
           }
         }
@@ -653,7 +654,7 @@
           },
           "giftReceiver": {
             "type": "string",
-            "description": "MSISDN of the gift receiver.",
+            "description": "MSISDN of the gift receiver",
             "example": "966561234567"
           },
           "giftPaymentShape": {
@@ -667,7 +668,8 @@
         "required": [
           "contentId",
           "subscriptionType",
-          "language"
+          "language",
+          "isGift"
         ],
         "type": "object",
         "properties": {
@@ -692,7 +694,7 @@
           },
           "giftReceiver": {
             "type": "string",
-            "description": "MSISDN of the gift receiver.",
+            "description": "MSISDN of the gift receiver",
             "example": "966561234567"
           },
           "giftPaymentShape": {
@@ -717,12 +719,12 @@
           },
           "userText": {
             "type": "string",
-            "description": "User selection for the confirmation.",
+            "description": "User selection for the confirmation",
             "example": "Yes"
           },
           "confirmationId": {
             "type": "string",
-            "description": "Identifier of the confirmation request.",
+            "description": "Identifier of the confirmation request",
             "example": "1111"
           }
         }

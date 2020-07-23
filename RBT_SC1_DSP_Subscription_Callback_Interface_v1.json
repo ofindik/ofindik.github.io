@@ -1,0 +1,358 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RBT SC1 DSP Subscription Callback Interface",
+    "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP. Server of the interface will be RBT Back-End.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "SC1",
+      "description": "Operations for RBT Service Contract 1"
+    }
+  ],
+  "paths": {
+    "/rbt/v1/confirmations": {
+      "put": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Requests the confirmation of a subscriber",
+        "description": "This method is used to request confirmation from a subscriber identified with {san}.",
+        "operationId": "requestConfirmationFromUser",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Confirmation Request is Submitted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/notifications": {
+      "put": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Sends a notification to a subscriber",
+        "description": "This method is used to send a notification to a subscriber identified with {san}.",
+        "operationId": "sendNotificationToUser",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notification Request is Submitted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/subscriptions": {
+      "put": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Sends subscription state notifications for a subscriber",
+        "description": "This method is used to send subscription state notifications for a subscriber identified with {san}.",
+        "operationId": "sendSubscriptionStateNotification",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionState"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription State Update is Submitted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConfirmationRequest": {
+        "required": [
+          "notificationText",
+          "options",
+          "confirmationId"
+        ],
+        "type": "object",
+        "properties": {
+          "notificationText": {
+            "type": "string",
+            "description": "Text that will be shown to the user",
+            "example": "Please confirm your RBT offer subscription gift send by XXXX?"
+          },
+          "options": {
+            "type": "string",
+            "description": "Options that will be shown to the user",
+            "example": "Yes,No"
+          },
+          "confirmationId": {
+            "type": "string",
+            "description": "Identifier of the confirmation request",
+            "example": "1111"
+          }
+        }
+      },
+      "NotificationRequest": {
+        "required": [
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Text that will be shown to the user",
+            "example": "Your RBT offer subscription is renewed for X Riyal."
+          }
+        }
+      },
+      "SubscriptionState": {
+        "required": [
+          "subscriptionId",
+          "state",
+          "triggerEvent"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "Identifier of the subscription",
+            "example": "10001"
+          },
+          "state": {
+            "type": "string",
+            "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
+            "example": "Inactive"
+          },
+          "triggerEvent": {
+            "type": "string",
+            "description": "Possible values are:\n  - Suspend\n  - Unsuspend\n  - Activate\n  - Inactivate\n  - Renew",
+            "example": "Renew"
+          },
+          "failureReason": {
+            "type": "string",
+            "description": "Failure reason for the \"Inactive\" state change.",
+            "example": "HLR flag setting failed"
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "errorCode",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 9000 - System failure. Details: \"Error detail\"."
+      }
+    },
+    "parameters": {
+      "sanParam": {
+        "name": "X-San",
+        "in": "header",
+        "description": "Service Account Number of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "msisdnParam": {
+        "name": "X-Msisdn",
+        "in": "header",
+        "description": "MSISDN of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "channelParam": {
+        "name": "X-Channel",
+        "in": "header",
+        "description": "This parameter is used to track the channel of the request. Possible values are;\n  - IVR\n  - USSD\n  - SMS\n  - RBTMobileApp\n  - RBTSubscriberPortal\n  - MobilyMobileApp\n  - MobilyEPortal\n  - OTHER",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "usernameParam": {
+        "name": "X-Username",
+        "in": "header",
+        "description": "This parameter is used to track the user of the API; log purposes only. Maximum length can be 128 chars.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "transactionIdParam": {
+        "name": "X-TransactionId",
+        "in": "header",
+        "description": "This parameter is used to track the API method transaction; log purposes only. It is meaningful for POST and PUT methods; in RBT APIs. Maximum length can be 128 chars.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "basic_security": {
+        "type": "http",
+        "description": "Basic Authentication",
+        "scheme": "basic"
+      }
+    }
+  }
+}

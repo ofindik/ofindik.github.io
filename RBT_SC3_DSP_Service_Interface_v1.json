@@ -1,0 +1,225 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RBT SC3 DSP Service Interface",
+    "description": "This document provides the RESTful service interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "SC3",
+      "description": "Operations for RBT Service Contract 3"
+    }
+  ],
+  "paths": {
+    "/rbt/v1/offers": {
+      "get": {
+        "tags": [
+          "SC3"
+        ],
+        "summary": "Queries the offers",
+        "description": "This method is used to query all offers.",
+        "operationId": "queryOffers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Offers are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Offers"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/offers/{offerId}": {
+      "get": {
+        "tags": [
+          "SC3"
+        ],
+        "summary": "Queries an offer",
+        "description": "This method is used to query an offer identified by {offerId}.",
+        "operationId": "queryOffer",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offerIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Offer is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Offer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Offers": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Offer"
+        }
+      },
+      "Offer": {
+        "required": [
+          "id",
+          "name",
+          "description",
+          "price"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the offer",
+            "example": "10001"
+          },
+          "name": {
+            "type": "string",
+            "description": "Possible values are:\n  - RBT\n  - PrayerTimes\n  - ProfileService\n  - MySignature",
+            "example": "PrayerTimes"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the offer",
+            "example": "PrayerTimes Offer Description"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the offer",
+            "example": "5"
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "errorCode",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 9000 - System failure. Details: \"Error detail\"."
+      }
+    },
+    "parameters": {
+      "channelParam": {
+        "name": "X-Channel",
+        "in": "header",
+        "description": "This parameter is used to track the channel of the request. Possible values are;\n  - IVR\n  - USSD\n  - SMS\n  - RBTMobileApp\n  - RBTSubscriberPortal\n  - MobilyMobileApp\n  - MobilyEPortal\n  - OTHER",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "usernameParam": {
+        "name": "X-Username",
+        "in": "header",
+        "description": "This parameter is used to track the user of the API; log purposes only. Maximum length can be 128 chars.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "offerIdParam": {
+        "name": "offerId",
+        "in": "path",
+        "description": "Identifier of the offer",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "basic_security": {
+        "type": "http",
+        "description": "Basic Authentication",
+        "scheme": "basic"
+      }
+    }
+  }
+}
