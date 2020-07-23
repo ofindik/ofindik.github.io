@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RBT SC8 DSP Subscriber Callback Interface",
+    "description": "This document provides the RESTful subscriber callback interface specification of RBT. Client of the interface will be DSP. Server of the interface will be RBT Back-End.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "SC8",
+      "description": "Operations for RBT Service Contract 8"
+    }
+  ],
+  "paths": {
+    "/rbt/v1/subscribers": {
+      "put": {
+        "tags": [
+          "SC8"
+        ],
+        "summary": "Sends subscriber state notifications for a subscriber",
+        "description": "This method is used to send subscriber state notifications for a subscriber.",
+        "operationId": "sendSubscriptionStateNotification",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriberState"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscriber State Update is Submitted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SubscriberState": {
+        "required": [
+          "msisdn",
+          "san",
+          "state"
+        ],
+        "type": "object",
+        "properties": {
+          "msisdn": {
+            "type": "string",
+            "description": "MSISDN of the subscriber",
+            "example": "966564051757"
+          },
+          "san": {
+            "type": "string",
+            "description": "Subscriber Account Number",
+            "example": "1001236563194353"
+          },
+          "state": {
+            "type": "string",
+            "description": "Possible values are:\n  - ACTIVE\n  - INACTIVE",
+            "example": "INACTIVE"
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "errorCode",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 9000 - System failure. Details: \"Error detail\"."
+      }
+    },
+    "parameters": {
+      "channelParam": {
+        "name": "X-Channel",
+        "in": "header",
+        "description": "This parameter is used to track the channel of the request. Possible values are;\n  - IVR\n  - USSD\n  - SMS\n  - RBTMobileApp\n  - RBTSubscriberPortal\n  - MobilyMobileApp\n  - MobilyEPortal\n  - OTHER",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "usernameParam": {
+        "name": "X-Username",
+        "in": "header",
+        "description": "This parameter is used to track the user of the API; log purposes only. Maximum length can be 128 chars.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "basic_security": {
+        "type": "http",
+        "description": "Basic Authentication",
+        "scheme": "basic"
+      }
+    }
+  }
+}

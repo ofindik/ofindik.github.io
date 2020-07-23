@@ -1,0 +1,375 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RBT SC5 DSP Recommendation Interface",
+    "description": "This document provides the RESTful recommendation interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "SC5",
+      "description": "Operations for RBT Service Contract 5"
+    }
+  ],
+  "paths": {
+    "/rbt/v1/recommended/tones": {
+      "get": {
+        "tags": [
+          "SC5"
+        ],
+        "summary": "Queries recommended tones",
+        "description": "This method is used to query recommended tones.",
+        "operationId": "queryRecommendedTones",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "RecommendedTones are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tones"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/recommended/artists": {
+      "get": {
+        "tags": [
+          "SC5"
+        ],
+        "summary": "Queries recommended artists",
+        "description": "This method is used to query recommended artists.",
+        "operationId": "queryRecommendedArtists",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "RecommendedArtists are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artists"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/recommended/subscriptionLists": {
+      "get": {
+        "tags": [
+          "SC5"
+        ],
+        "summary": "Queries recommended subscriptionLists",
+        "description": "This method is used to query recommended subscriptionLists.",
+        "operationId": "queryRecommendedSubscriptionLists",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "RecommendedSubscriptionLists are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionLists"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Tones": {
+        "required": [
+          "tones"
+        ],
+        "type": "object",
+        "properties": {
+          "tones": {
+            "$ref": "#/components/schemas/ToneArray"
+          }
+        }
+      },
+      "ToneArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Tone"
+        }
+      },
+      "Tone": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the tone",
+            "example": "1111"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the tone",
+            "example": "Tone A"
+          }
+        }
+      },
+      "Artists": {
+        "required": [
+          "artists"
+        ],
+        "type": "object",
+        "properties": {
+          "artists": {
+            "$ref": "#/components/schemas/ArtistArray"
+          }
+        }
+      },
+      "ArtistArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Artist"
+        }
+      },
+      "Artist": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the artist",
+            "example": "3333"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the artist",
+            "example": "Artist A"
+          }
+        }
+      },
+      "SubscriptionLists": {
+        "required": [
+          "subscriptionLists"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionLists": {
+            "$ref": "#/components/schemas/SubscriptionListArray"
+          }
+        }
+      },
+      "SubscriptionListArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SubscriptionList"
+        }
+      },
+      "SubscriptionList": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the subscriptionList",
+            "example": "5555"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the subscriptionList",
+            "example": "Subscription List A"
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "errorCode",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 9000 - System failure. Details: \"Error detail\"."
+      }
+    },
+    "parameters": {
+      "sanParam": {
+        "name": "X-San",
+        "in": "header",
+        "description": "Service Account Number of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "msisdnParam": {
+        "name": "X-Msisdn",
+        "in": "header",
+        "description": "MSISDN of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "channelParam": {
+        "name": "X-Channel",
+        "in": "header",
+        "description": "This parameter is used to track the channel of the request. Possible values are;\n  - IVR\n  - USSD\n  - SMS\n  - RBTMobileApp\n  - RBTSubscriberPortal\n  - MobilyMobileApp\n  - MobilyEPortal\n  - OTHER",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "usernameParam": {
+        "name": "X-Username",
+        "in": "header",
+        "description": "This parameter is used to track the user of the API; log purposes only. Maximum length can be 128 chars.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "basic_security": {
+        "type": "http",
+        "description": "Basic Authentication",
+        "scheme": "basic"
+      }
+    }
+  }
+}
