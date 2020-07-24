@@ -27,6 +27,12 @@
         "operationId": "sendSubscriptionStateNotification",
         "parameters": [
           {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
             "$ref": "#/components/parameters/channelParam"
           },
           {
@@ -79,22 +85,10 @@
     "schemas": {
       "SubscriberState": {
         "required": [
-          "msisdn",
-          "san",
           "state"
         ],
         "type": "object",
         "properties": {
-          "msisdn": {
-            "type": "string",
-            "description": "MSISDN of the subscriber",
-            "example": "966564051757"
-          },
-          "san": {
-            "type": "string",
-            "description": "Subscriber Account Number",
-            "example": "1001236563194353"
-          },
           "state": {
             "type": "string",
             "description": "Possible values are:\n  - ACTIVE\n  - INACTIVE",
@@ -120,6 +114,24 @@
       }
     },
     "parameters": {
+      "sanParam": {
+        "name": "X-San",
+        "in": "header",
+        "description": "Service Account Number of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "msisdnParam": {
+        "name": "X-Msisdn",
+        "in": "header",
+        "description": "MSISDN of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "channelParam": {
         "name": "X-Channel",
         "in": "header",
