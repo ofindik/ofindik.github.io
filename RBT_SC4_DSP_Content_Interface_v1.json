@@ -156,9 +156,10 @@
           "200": {
             "description": "Tone Content is Retrieved",
             "content": {
-              "application/json": {
+              "audio/wav": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToneContent"
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -1352,25 +1353,6 @@
             "items": {
               "$ref": "#/components/schemas/Tone"
             }
-          }
-        }
-      },
-      "ToneContent": {
-        "required": [
-          "format",
-          "file"
-        ],
-        "type": "object",
-        "properties": {
-          "format": {
-            "type": "string",
-            "description": "Format of the content",
-            "example": "Wav"
-          },
-          "file": {
-            "type": "string",
-            "format": "byte",
-            "description": "Base64-encoded tone content"
           }
         }
       },
