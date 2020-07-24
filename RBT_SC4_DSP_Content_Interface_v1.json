@@ -1058,6 +1058,7 @@
           "id",
           "name",
           "price",
+          "chargingPeriod",
           "currentSubscriptions",
           "totalSubscriptions",
           "updateTime",
@@ -1080,6 +1081,11 @@
             "type": "string",
             "description": "Price of the tone",
             "example": "5"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the tone",
+            "example": "P000Y000M030DT00H00M00S"
           },
           "currentSubscriptions": {
             "type": "integer",
@@ -1113,6 +1119,7 @@
           "id",
           "name",
           "price",
+          "chargingPeriod",
           "currentSubscriptions",
           "totalSubscriptions",
           "updateTime",
@@ -1136,6 +1143,11 @@
             "type": "string",
             "description": "Price of the artist",
             "example": "5"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the tone",
+            "example": "P000Y000M030DT00H00M00S"
           },
           "currentSubscriptions": {
             "type": "integer",
@@ -1175,6 +1187,7 @@
           "id",
           "name",
           "price",
+          "chargingPeriod",
           "currentSubscriptions",
           "totalSubscriptions",
           "updateTime",
@@ -1198,6 +1211,11 @@
             "type": "string",
             "description": "Price of the subscriptionList",
             "example": "5"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the tone",
+            "example": "P000Y000M030DT00H00M00S"
           },
           "currentSubscriptions": {
             "type": "integer",
@@ -1237,6 +1255,7 @@
           "id",
           "name",
           "price",
+          "chargingPeriod",
           "currentSubscriptions",
           "totalSubscriptions",
           "updateTime",
@@ -1260,6 +1279,11 @@
             "type": "string",
             "description": "Price of the category",
             "example": "5"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the tone",
+            "example": "P000Y000M030DT00H00M00S"
           },
           "currentSubscriptions": {
             "type": "integer",
@@ -1299,6 +1323,7 @@
           "id",
           "name",
           "price",
+          "chargingPeriod",
           "currentSubscriptions",
           "totalSubscriptions",
           "updateTime",
@@ -1322,6 +1347,11 @@
             "type": "string",
             "description": "Price of the mood",
             "example": "5"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the tone",
+            "example": "P000Y000M030DT00H00M00S"
           },
           "currentSubscriptions": {
             "type": "integer",

@@ -144,7 +144,8 @@
           "id",
           "name",
           "description",
-          "price"
+          "price",
+          "chargingPeriod"
         ],
         "type": "object",
         "properties": {
@@ -167,6 +168,11 @@
             "type": "string",
             "description": "Price of the offer",
             "example": "5"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the offer",
+            "example": "P000Y000M030DT00H00M00S"
           }
         }
       },
