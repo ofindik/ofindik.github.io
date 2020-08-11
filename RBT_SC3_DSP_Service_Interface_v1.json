@@ -181,7 +181,7 @@
           },
           "parentName": {
             "type": "string",
-            "description": "Possible values are:\n  - RBT\n  - PrayerTimes\n  - ProfileService\n  - MySignature",
+            "description": "Possible values are:\n  - RBT",
             "example": "RBT"
           }
         }
