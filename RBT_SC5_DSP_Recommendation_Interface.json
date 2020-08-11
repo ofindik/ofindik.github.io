@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC5 DSP Recommendation Interface",
     "description": "This document provides the RESTful recommendation interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1"
+    "version": "v2"
   },
   "servers": [
     {
@@ -37,6 +37,12 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -98,6 +104,12 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -159,6 +171,12 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -223,7 +241,14 @@
       "Tone": {
         "required": [
           "id",
-          "name"
+          "name",
+          "price",
+          "chargingPeriod",
+          "currentSubscriptions",
+          "totalSubscriptions",
+          "updateTime",
+          "playCount",
+          "thumbnail"
         ],
         "type": "object",
         "properties": {
@@ -236,6 +261,41 @@
             "type": "string",
             "description": "Name of the tone",
             "example": "Tone A"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the tone",
+            "example": "5"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the tone",
+            "example": "P000Y000M030DT00H00M00S"
+          },
+          "currentSubscriptions": {
+            "type": "integer",
+            "description": "Active subscription count of the tone indicating popularity",
+            "example": "1000"
+          },
+          "totalSubscriptions": {
+            "type": "integer",
+            "description": "Total subscription count of the tone",
+            "example": "10000000"
+          },
+          "updateTime": {
+            "type": "integer",
+            "description": "Last update time of the tone in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "playCount": {
+            "type": "integer",
+            "description": "Play count of the tone",
+            "example": "2300000"
+          },
+          "thumbnail": {
+            "type": "integer",
+            "description": "Thumbnail of the tone in URL format",
+            "example": "http://<dsp_cms_vip>/xxxx"
           }
         }
       },
@@ -259,7 +319,14 @@
       "Artist": {
         "required": [
           "id",
-          "name"
+          "name",
+          "price",
+          "chargingPeriod",
+          "currentSubscriptions",
+          "totalSubscriptions",
+          "updateTime",
+          "playCount",
+          "thumbnail"
         ],
         "type": "object",
         "properties": {
@@ -272,6 +339,41 @@
             "type": "string",
             "description": "Name of the artist",
             "example": "Artist A"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the artist",
+            "example": "5"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the tone",
+            "example": "P000Y000M030DT00H00M00S"
+          },
+          "currentSubscriptions": {
+            "type": "integer",
+            "description": "Active subscription count of the artist indicating popularity",
+            "example": "1000"
+          },
+          "totalSubscriptions": {
+            "type": "integer",
+            "description": "Total subscription count of the artist",
+            "example": "10000000"
+          },
+          "updateTime": {
+            "type": "integer",
+            "description": "Last update time of the artist in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "playCount": {
+            "type": "integer",
+            "description": "Play count of the artist",
+            "example": "2300000"
+          },
+          "thumbnail": {
+            "type": "integer",
+            "description": "Thumbnail of the artist in URL format",
+            "example": "http://<dsp_cms_vip>/xxxx"
           }
         }
       },
@@ -295,7 +397,14 @@
       "SubscriptionList": {
         "required": [
           "id",
-          "name"
+          "name",
+          "price",
+          "chargingPeriod",
+          "currentSubscriptions",
+          "totalSubscriptions",
+          "updateTime",
+          "playCount",
+          "thumbnail"
         ],
         "type": "object",
         "properties": {
@@ -308,6 +417,41 @@
             "type": "string",
             "description": "Name of the subscriptionList",
             "example": "Subscription List A"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the subscriptionList",
+            "example": "5"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the tone",
+            "example": "P000Y000M030DT00H00M00S"
+          },
+          "currentSubscriptions": {
+            "type": "integer",
+            "description": "Active subscription count of the subscriptionList indicating popularity",
+            "example": "1000"
+          },
+          "totalSubscriptions": {
+            "type": "integer",
+            "description": "Total subscription count of the subscriptionList",
+            "example": "10000000"
+          },
+          "updateTime": {
+            "type": "integer",
+            "description": "Last update time of the subscriptionList in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "playCount": {
+            "type": "integer",
+            "description": "Play count of the subscriptionList",
+            "example": "2300000"
+          },
+          "thumbnail": {
+            "type": "integer",
+            "description": "Thumbnail of the subscriptionList in URL format",
+            "example": "http://<dsp_cms_vip>/xxxx"
           }
         }
       },
@@ -361,6 +505,22 @@
         "description": "This parameter is used to track the user of the API; log purposes only. Maximum length can be 128 chars.",
         "schema": {
           "type": "string"
+        }
+      },
+      "offsetParam": {
+        "name": "offset",
+        "in": "query",
+        "description": "The number of items to skip before starting to collect the result set",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "limitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "The numbers of items to return",
+        "schema": {
+          "type": "integer"
         }
       }
     },
