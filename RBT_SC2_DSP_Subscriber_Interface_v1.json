@@ -80,13 +80,13 @@
     "schemas": {
       "Subscriber": {
         "required": [
-          "customerName",
-          "imsi",
-          "language",
           "msisdn",
-          "paymentType",
           "san",
-          "state"
+          "language",
+          "state",
+          "paymentType",
+          "customerName",
+          "imsi"
         ],
         "type": "object",
         "properties": {
@@ -124,6 +124,27 @@
             "type": "string",
             "description": "IMSI of the subscriber",
             "example": "420032332534811"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attribute"
+            }
+          }
+        }
+      },
+      "Attribute": {
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
           }
         }
       },
