@@ -173,6 +173,16 @@
             "type": "string",
             "description": "Charging period of the offer",
             "example": "P000Y000M030DT00H00M00S"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "Identifier of the parent offer",
+            "example": "10002"
+          },
+          "parentName": {
+            "type": "string",
+            "description": "Possible values are:\n  - RBT\n  - PrayerTimes\n  - ProfileService\n  - MySignature",
+            "example": "RBT"
           }
         }
       },
