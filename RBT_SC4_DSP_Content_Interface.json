@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC4 DSP Content Interface",
     "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1"
+    "version": "v2"
   },
   "servers": [
     {
@@ -34,6 +34,12 @@
           },
           {
             "$ref": "#/components/parameters/keyParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -100,7 +106,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToneDetails"
+                  "$ref": "#/components/schemas/Tone"
                 }
               }
             }
@@ -209,6 +215,12 @@
           },
           {
             "$ref": "#/components/parameters/keyParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -271,11 +283,75 @@
         ],
         "responses": {
           "200": {
-            "description": "Tone is Retrieved",
+            "description": "Artist is Retrieved",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArtistDetails"
+                  "$ref": "#/components/schemas/Artist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/artists/{artistId}/tones": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries the tones of an artist",
+        "description": "This method is used to query the tones of an artist identified by {artistId}.",
+        "operationId": "queryArtistTones",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/artistIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tones of an Artist are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tones"
                 }
               }
             }
@@ -325,6 +401,12 @@
           },
           {
             "$ref": "#/components/parameters/keyParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -372,7 +454,7 @@
           "SC4"
         ],
         "summary": "Queries a subscriptionList",
-        "description": "This method is used to query a subscriptionList identified by {artistId}.",
+        "description": "This method is used to query a subscriptionList identified by {subscriptionListId}.",
         "operationId": "querySubscriptionList",
         "parameters": [
           {
@@ -391,7 +473,71 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionListDetails"
+                  "$ref": "#/components/schemas/SubscriptionList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/subscriptionLists/{subscriptionListId}/tones": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries the tones of a subscriptionList",
+        "description": "This method is used to query the tones of a subscriptionList identified by {subscriptionListId}.",
+        "operationId": "querySubscriptionListTones",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionListIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tones of a SubscriptionList are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tones"
                 }
               }
             }
@@ -438,6 +584,12 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -504,7 +656,71 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategoryDetails"
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/categories/{categoryId}/tones": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries the tones of a category",
+        "description": "This method is used to query the tones of a category identified by {categoryId}.",
+        "operationId": "queryCategoryTones",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/categoryIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tones of a Category are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tones"
                 }
               }
             }
@@ -551,6 +767,12 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -617,7 +839,71 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MoodDetails"
+                  "$ref": "#/components/schemas/Mood"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/moods/{moodId}/tones": {
+      "get": {
+        "tags": [
+          "SC4"
+        ],
+        "summary": "Queries the tones of a mood",
+        "description": "This method is used to query the tones of a mood identified by {moodId}.",
+        "operationId": "queryMoodTones",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/moodIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tones of a Mood are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tones"
                 }
               }
             }
@@ -664,6 +950,12 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -719,6 +1011,12 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -774,6 +1072,12 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -829,6 +1133,12 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
           }
         ],
         "responses": {
@@ -893,169 +1203,6 @@
       "Tone": {
         "required": [
           "id",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Identifier of the tone",
-            "example": "1111"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the tone",
-            "example": "Tone A"
-          }
-        }
-      },
-      "Artists": {
-        "required": [
-          "artists"
-        ],
-        "type": "object",
-        "properties": {
-          "artists": {
-            "$ref": "#/components/schemas/ArtistArray"
-          }
-        }
-      },
-      "ArtistArray": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Artist"
-        }
-      },
-      "Artist": {
-        "required": [
-          "id",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Identifier of the artist",
-            "example": "3333"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the artist",
-            "example": "Artist A"
-          }
-        }
-      },
-      "SubscriptionLists": {
-        "required": [
-          "subscriptionLists"
-        ],
-        "type": "object",
-        "properties": {
-          "subscriptionLists": {
-            "$ref": "#/components/schemas/SubscriptionListArray"
-          }
-        }
-      },
-      "SubscriptionListArray": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/SubscriptionList"
-        }
-      },
-      "SubscriptionList": {
-        "required": [
-          "id",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Identifier of the subscriptionList",
-            "example": "5555"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the subscriptionList",
-            "example": "Subscription List A"
-          }
-        }
-      },
-      "Categories": {
-        "required": [
-          "categories"
-        ],
-        "type": "object",
-        "properties": {
-          "categories": {
-            "$ref": "#/components/schemas/CategoryArray"
-          }
-        }
-      },
-      "CategoryArray": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Category"
-        }
-      },
-      "Category": {
-        "required": [
-          "id",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Identifier of the category",
-            "example": "11001"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the category",
-            "example": "Category A"
-          }
-        }
-      },
-      "Moods": {
-        "required": [
-          "moods"
-        ],
-        "type": "object",
-        "properties": {
-          "moods": {
-            "$ref": "#/components/schemas/MoodArray"
-          }
-        }
-      },
-      "MoodArray": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Mood"
-        }
-      },
-      "Mood": {
-        "required": [
-          "id",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Identifier of the mood",
-            "example": "22001"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the mood",
-            "example": "Mood A"
-          }
-        }
-      },
-      "ToneDetails": {
-        "required": [
-          "id",
           "name",
           "price",
           "chargingPeriod",
@@ -1114,7 +1261,24 @@
           }
         }
       },
-      "ArtistDetails": {
+      "Artists": {
+        "required": [
+          "artists"
+        ],
+        "type": "object",
+        "properties": {
+          "artists": {
+            "$ref": "#/components/schemas/ArtistArray"
+          }
+        }
+      },
+      "ArtistArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Artist"
+        }
+      },
+      "Artist": {
         "required": [
           "id",
           "name",
@@ -1124,8 +1288,7 @@
           "totalSubscriptions",
           "updateTime",
           "playCount",
-          "thumbnail",
-          "tones"
+          "thumbnail"
         ],
         "type": "object",
         "properties": {
@@ -1173,16 +1336,27 @@
             "type": "integer",
             "description": "Thumbnail of the artist in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
-          },
-          "tones": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Tone"
-            }
           }
         }
       },
-      "SubscriptionListDetails": {
+      "SubscriptionLists": {
+        "required": [
+          "subscriptionLists"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionLists": {
+            "$ref": "#/components/schemas/SubscriptionListArray"
+          }
+        }
+      },
+      "SubscriptionListArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SubscriptionList"
+        }
+      },
+      "SubscriptionList": {
         "required": [
           "id",
           "name",
@@ -1192,8 +1366,7 @@
           "totalSubscriptions",
           "updateTime",
           "playCount",
-          "thumbnail",
-          "tones"
+          "thumbnail"
         ],
         "type": "object",
         "properties": {
@@ -1241,16 +1414,27 @@
             "type": "integer",
             "description": "Thumbnail of the subscriptionList in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
-          },
-          "tones": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Tone"
-            }
           }
         }
       },
-      "CategoryDetails": {
+      "Categories": {
+        "required": [
+          "categories"
+        ],
+        "type": "object",
+        "properties": {
+          "categories": {
+            "$ref": "#/components/schemas/CategoryArray"
+          }
+        }
+      },
+      "CategoryArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Category"
+        }
+      },
+      "Category": {
         "required": [
           "id",
           "name",
@@ -1260,15 +1444,14 @@
           "totalSubscriptions",
           "updateTime",
           "playCount",
-          "thumbnail",
-          "tones"
+          "thumbnail"
         ],
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
             "description": "Identifier of the category",
-            "example": "1001"
+            "example": "11001"
           },
           "name": {
             "type": "string",
@@ -1309,16 +1492,27 @@
             "type": "integer",
             "description": "Thumbnail of the category in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
-          },
-          "tones": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Tone"
-            }
           }
         }
       },
-      "MoodDetails": {
+      "Moods": {
+        "required": [
+          "moods"
+        ],
+        "type": "object",
+        "properties": {
+          "moods": {
+            "$ref": "#/components/schemas/MoodArray"
+          }
+        }
+      },
+      "MoodArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Mood"
+        }
+      },
+      "Mood": {
         "required": [
           "id",
           "name",
@@ -1328,15 +1522,14 @@
           "totalSubscriptions",
           "updateTime",
           "playCount",
-          "thumbnail",
-          "tones"
+          "thumbnail"
         ],
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
             "description": "Identifier of the mood",
-            "example": "1001"
+            "example": "22001"
           },
           "name": {
             "type": "string",
@@ -1377,12 +1570,6 @@
             "type": "integer",
             "description": "Thumbnail of the mood in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
-          },
-          "tones": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Tone"
-            }
           }
         }
       },
@@ -1427,6 +1614,22 @@
         "required": true,
         "schema": {
           "type": "string"
+        }
+      },
+      "offsetParam": {
+        "name": "offset",
+        "in": "query",
+        "description": "The number of items to skip before starting to collect the result set",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "limitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "The numbers of items to return",
+        "schema": {
+          "type": "integer"
         }
       },
       "toneIdParam": {
