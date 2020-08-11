@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC8 DSP Subscriber Callback Interface",
     "description": "This document provides the RESTful subscriber callback interface specification of RBT. Client of the interface will be DSP. Server of the interface will be RBT Back-End.",
-    "version": "v1"
+    "version": "v2"
   },
   "servers": [
     {
@@ -22,9 +22,9 @@
         "tags": [
           "SC8"
         ],
-        "summary": "Sends subscriber state notifications for a subscriber",
-        "description": "This method is used to send subscriber state notifications for a subscriber.",
-        "operationId": "sendSubscriptionStateNotification",
+        "summary": "Sends update notifications for a subscriber",
+        "description": "This method is used to send update notifications for a subscriber.",
+        "operationId": "sendSubscriptionUpdateNotification",
         "parameters": [
           {
             "$ref": "#/components/parameters/sanParam"
@@ -43,14 +43,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SubscriberState"
+                "$ref": "#/components/schemas/SubscriberInfo"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Subscriber State Update is Submitted"
+            "description": "Subscriber Update is Submitted"
           },
           "400": {
             "description": "Bad Request",
@@ -83,16 +83,21 @@
   },
   "components": {
     "schemas": {
-      "SubscriberState": {
+      "SubscriberInfo": {
         "required": [
-          "state"
+          "eventType"
         ],
         "type": "object",
         "properties": {
-          "state": {
+          "eventType": {
             "type": "string",
-            "description": "Possible values are:\n  - ACTIVE\n  - INACTIVE",
-            "example": "INACTIVE"
+            "description": "Possible values are:\n  - BARRED\n  - UNBARRED\n  - DISCONNECT\n  - NUMBER_SWAP",
+            "example": "NUMBER_SWAP"
+          },
+          "newMsisdn": {
+            "type": "string",
+            "description": "New MSISDN value when eventType is NUMBER_SWAP",
+            "example": "966564051757"
           }
         }
       },
@@ -135,7 +140,7 @@
       "channelParam": {
         "name": "X-Channel",
         "in": "header",
-        "description": "This parameter is used to track the channel of the request. Possible values are;\n  - IVR\n  - USSD\n  - SMS\n  - RBTMobileApp\n  - RBTSubscriberPortal\n  - MobilyMobileApp\n  - MobilyEPortal\n  - OTHER",
+        "description": "This parameter is used to track the channel of the request. Possible values are;\n  - DSP\n  - OTHER",
         "schema": {
           "type": "string"
         }
