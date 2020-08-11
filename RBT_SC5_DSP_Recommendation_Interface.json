@@ -326,7 +326,8 @@
           "totalSubscriptions",
           "updateTime",
           "playCount",
-          "thumbnail"
+          "thumbnail",
+          "defaultTone"
         ],
         "type": "object",
         "properties": {
@@ -374,6 +375,9 @@
             "type": "integer",
             "description": "Thumbnail of the artist in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
+          },
+          "defaultTone": {
+            "$ref": "#/components/schemas/Tone"
           }
         }
       },
@@ -404,7 +408,8 @@
           "totalSubscriptions",
           "updateTime",
           "playCount",
-          "thumbnail"
+          "thumbnail",
+          "defaultTone"
         ],
         "type": "object",
         "properties": {
@@ -452,6 +457,9 @@
             "type": "integer",
             "description": "Thumbnail of the subscriptionList in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
+          },
+          "defaultTone": {
+            "$ref": "#/components/schemas/Tone"
           }
         }
       },
