@@ -425,6 +425,142 @@
         ]
       }
     },
+    "/rbt/v1/gift/contentOfferSubscriptions": {
+      "get": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Queries the gifted content offer subscriptions",
+        "description": "This method is used to query all gifted content offer subscriptions of a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
+        "operationId": "queryGiftedContentOfferSubscriptions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gifted Content Offer Subscriptions are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GiftedContentOfferSubscriptions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/gift/contentOfferSubscriptions/{subscriptionId}/state": {
+      "put": {
+        "tags": [
+          "SC1"
+        ],
+        "summary": "Updates a gifted content offer subscription.",
+        "description": "This method is used to update a gifted content offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
+        "operationId": "updateGiftedContentOfferSubscription",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/giftReceiverParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Status"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Gifted Content Offer Subscription Request is Submitted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
     "/confirmations": {
       "put": {
         "tags": [
@@ -505,8 +641,7 @@
           "subscriptionId",
           "offerId",
           "offerName",
-          "state",
-          "isGift"
+          "state"
         ],
         "type": "object",
         "properties": {
@@ -529,28 +664,12 @@
             "type": "string",
             "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
             "example": "Active"
-          },
-          "isGift": {
-            "type": "boolean",
-            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftReceiver\" and \"paymentShape\" information will be returned."
-          },
-          "giftReceiver": {
-            "type": "string",
-            "description": "MSISDN of the gift receiver",
-            "example": "966561234567"
-          },
-          "giftPaymentShape": {
-            "type": "string",
-            "description": "Possible values are:\n  - All\n  - Initial",
-            "example": "All"
           }
         }
       },
       "ServiceOffer": {
         "required": [
-          "offerId",
-          "language",
-          "isGift"
+          "offerId"
         ],
         "type": "object",
         "properties": {
@@ -563,20 +682,6 @@
             "type": "string",
             "description": "Possible values are:\n  - EN\n  - AR",
             "example": "EN"
-          },
-          "isGift": {
-            "type": "boolean",
-            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftReceiver\" and \"paymentShape\" information will be returned."
-          },
-          "giftReceiver": {
-            "type": "string",
-            "description": "MSISDN of the gift receiver",
-            "example": "966561234567"
-          },
-          "giftPaymentShape": {
-            "type": "string",
-            "description": "Possible values are:\n  - All\n  - Initial",
-            "example": "All"
           }
         }
       },
@@ -650,11 +755,11 @@
           },
           "isGift": {
             "type": "boolean",
-            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftReceiver\" and \"paymentShape\" information will be returned."
+            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftSender\" and \"paymentShape\" information will be returned."
           },
-          "giftReceiver": {
+          "giftSender": {
             "type": "string",
-            "description": "MSISDN of the gift receiver",
+            "description": "MSISDN of the gift sender",
             "example": "966561234567"
           },
           "giftPaymentShape": {
@@ -668,7 +773,6 @@
         "required": [
           "contentId",
           "subscriptionType",
-          "language",
           "isGift"
         ],
         "type": "object",
@@ -690,7 +794,67 @@
           },
           "isGift": {
             "type": "boolean",
-            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftReceiver\" and \"paymentShape\" information will be returned."
+            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftReceiverLanguage\", \"giftReceiver\" and \"paymentShape\" information will be required."
+          },
+          "giftReceiverLanguage": {
+            "type": "string",
+            "description": "Possible values are:\n  - EN\n  - AR",
+            "example": "EN"
+          },
+          "giftReceiver": {
+            "type": "string",
+            "description": "MSISDN of the gift receiver",
+            "example": "966561234567"
+          },
+          "giftPaymentShape": {
+            "type": "string",
+            "description": "Possible values are:\n  - All\n  - Initial",
+            "example": "All"
+          }
+        }
+      },
+      "GiftedContentOfferSubscriptions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/GiftedContentOfferSubscription"
+        }
+      },
+      "GiftedContentOfferSubscription": {
+        "required": [
+          "subscriptionId",
+          "contentId",
+          "contentName",
+          "subscriptionType",
+          "state",
+          "giftReceiver",
+          "giftPaymentShape"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "Identifier of the subscription",
+            "example": "10002"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "Identifier of the content",
+            "example": "40001"
+          },
+          "contentName": {
+            "type": "string",
+            "description": "Name of the content",
+            "example": "Tone A"
+          },
+          "subscriptionType": {
+            "type": "string",
+            "description": "Possible values are:\n  - Tone\n  - Artist\n  - Category\n  - Mood\n  - SubscriptionList",
+            "example": "Tone"
+          },
+          "state": {
+            "type": "string",
+            "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
+            "example": "Active"
           },
           "giftReceiver": {
             "type": "string",
@@ -793,6 +957,15 @@
         "name": "subscriptionId",
         "in": "path",
         "description": "Identifier of the subscription",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "giftReceiverParam": {
+        "name": "X-GiftReceiver",
+        "in": "header",
+        "description": "MSISDN of the gift receiver",
         "required": true,
         "schema": {
           "type": "string"
