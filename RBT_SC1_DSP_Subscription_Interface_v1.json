@@ -84,7 +84,7 @@
         "tags": [
           "SC1"
         ],
-        "summary": "Initiates a new service offer subscription.",
+        "summary": "Initiates a new service offer subscription",
         "description": "This method is used to initiate a new service offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
         "operationId": "newServiceOfferSubscription",
         "parameters": [
@@ -157,7 +157,7 @@
         "tags": [
           "SC1"
         ],
-        "summary": "Updates a service offer subscription.",
+        "summary": "Updates a service offer subscription",
         "description": "This method is used to update a service offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
         "operationId": "updateServiceOfferSubscription",
         "parameters": [
@@ -288,7 +288,7 @@
         "tags": [
           "SC1"
         ],
-        "summary": "Initiates a new content offer subscription.",
+        "summary": "Initiates a new content offer subscription",
         "description": "This method is used to initiate a new content offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
         "operationId": "newContentOfferSubscription",
         "parameters": [
@@ -361,7 +361,7 @@
         "tags": [
           "SC1"
         ],
-        "summary": "Updates a content offer subscription.",
+        "summary": "Updates a content offer subscription",
         "description": "This method is used to update a content offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
         "operationId": "updateContentOfferSubscription",
         "parameters": [
@@ -430,8 +430,8 @@
         "tags": [
           "SC1"
         ],
-        "summary": "Queries the gifted content offer subscriptions",
-        "description": "This method is used to query all gifted content offer subscriptions of a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
+        "summary": "Queries the content offer subscriptions gifted by this user",
+        "description": "This method is used to query all content offer subscriptions gifted by a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
         "operationId": "queryGiftedContentOfferSubscriptions",
         "parameters": [
           {
@@ -494,8 +494,8 @@
         "tags": [
           "SC1"
         ],
-        "summary": "Updates a gifted content offer subscription.",
-        "description": "This method is used to update a gifted content offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
+        "summary": "Updates a content offer subscription gifted by this user",
+        "description": "This method is used to update a content offer subscription gifted by a subscriber identified with {san}. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
         "operationId": "updateGiftedContentOfferSubscription",
         "parameters": [
           {
@@ -566,7 +566,7 @@
         "tags": [
           "SC1"
         ],
-        "summary": "Returns the result of confirmation.",
+        "summary": "Returns the result of confirmation",
         "description": "This method is used to return the result of \"GetConfirmationFromUser\" method.",
         "operationId": "returnConfirmationResult",
         "parameters": [
