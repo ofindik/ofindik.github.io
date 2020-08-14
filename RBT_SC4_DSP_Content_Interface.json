@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC4 DSP Content Interface",
     "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v3"
+    "version": "v4"
   },
   "servers": [
     {
@@ -1237,25 +1237,25 @@
           "currentSubscriptions": {
             "type": "integer",
             "description": "Active subscription count of the tone indicating popularity",
-            "example": "1000"
+            "example": 1000
           },
           "totalSubscriptions": {
             "type": "integer",
             "description": "Total subscription count of the tone",
-            "example": "10000000"
+            "example": 10000000
           },
           "updateTime": {
-            "type": "integer",
+            "type": "string",
             "description": "Last update time of the tone in \"ddMMyyyyThhmm\" format",
             "example": "22032020T1456"
           },
           "playCount": {
             "type": "integer",
             "description": "Play count of the tone",
-            "example": "2300000"
+            "example": 2300000
           },
           "thumbnail": {
-            "type": "integer",
+            "type": "string",
             "description": "Thumbnail of the tone in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
           }
@@ -1316,25 +1316,25 @@
           "currentSubscriptions": {
             "type": "integer",
             "description": "Active subscription count of the artist indicating popularity",
-            "example": "1000"
+            "example": 1000
           },
           "totalSubscriptions": {
             "type": "integer",
             "description": "Total subscription count of the artist",
-            "example": "10000000"
+            "example": 10000000
           },
           "updateTime": {
-            "type": "integer",
+            "type": "string",
             "description": "Last update time of the artist in \"ddMMyyyyThhmm\" format",
             "example": "22032020T1456"
           },
           "playCount": {
             "type": "integer",
             "description": "Play count of the artist",
-            "example": "2300000"
+            "example": 2300000
           },
           "thumbnail": {
-            "type": "integer",
+            "type": "string",
             "description": "Thumbnail of the artist in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
           },
@@ -1398,25 +1398,25 @@
           "currentSubscriptions": {
             "type": "integer",
             "description": "Active subscription count of the subscriptionList indicating popularity",
-            "example": "1000"
+            "example": 1000
           },
           "totalSubscriptions": {
             "type": "integer",
             "description": "Total subscription count of the subscriptionList",
-            "example": "10000000"
+            "example": 10000000
           },
           "updateTime": {
-            "type": "integer",
+            "type": "string",
             "description": "Last update time of the subscriptionList in \"ddMMyyyyThhmm\" format",
             "example": "22032020T1456"
           },
           "playCount": {
             "type": "integer",
             "description": "Play count of the subscriptionList",
-            "example": "2300000"
+            "example": 2300000
           },
           "thumbnail": {
-            "type": "integer",
+            "type": "string",
             "description": "Thumbnail of the subscriptionList in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
           },
@@ -1480,25 +1480,25 @@
           "currentSubscriptions": {
             "type": "integer",
             "description": "Active subscription count of the category indicating popularity",
-            "example": "1000"
+            "example": 1000
           },
           "totalSubscriptions": {
             "type": "integer",
             "description": "Total subscription count of the category",
-            "example": "10000000"
+            "example": 10000000
           },
           "updateTime": {
-            "type": "integer",
+            "type": "string",
             "description": "Last update time of the category in \"ddMMyyyyThhmm\" format",
             "example": "22032020T1456"
           },
           "playCount": {
             "type": "integer",
             "description": "Play count of the category",
-            "example": "2300000"
+            "example": 2300000
           },
           "thumbnail": {
-            "type": "integer",
+            "type": "string",
             "description": "Thumbnail of the category in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
           },
@@ -1562,25 +1562,25 @@
           "currentSubscriptions": {
             "type": "integer",
             "description": "Active subscription count of the mood indicating popularity",
-            "example": "1000"
+            "example": 1000
           },
           "totalSubscriptions": {
             "type": "integer",
             "description": "Total subscription count of the mood",
-            "example": "10000000"
+            "example": 10000000
           },
           "updateTime": {
-            "type": "integer",
+            "type": "string",
             "description": "Last update time of the mood in \"ddMMyyyyThhmm\" format",
             "example": "22032020T1456"
           },
           "playCount": {
             "type": "integer",
             "description": "Play count of the mood",
-            "example": "2300000"
+            "example": 2300000
           },
           "thumbnail": {
-            "type": "integer",
+            "type": "string",
             "description": "Thumbnail of the mood in URL format",
             "example": "http://<dsp_cms_vip>/xxxx"
           },
