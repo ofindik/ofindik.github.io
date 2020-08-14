@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC1 DSP Subscription Callback Interface",
     "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP. Server of the interface will be RBT Back-End.",
-    "version": "v1"
+    "version": "v2"
   },
   "servers": [
     {
@@ -300,7 +300,7 @@
             "type": "string"
           }
         },
-        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 9000 - System failure. Details: \"Error detail\"."
+        "description": "Possible errors:\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 9000 - System failure. Details: \"Error detail\"."
       }
     },
     "parameters": {
@@ -342,6 +342,7 @@
         "name": "X-TransactionId",
         "in": "header",
         "description": "This parameter is used to track the API method transaction; log purposes only. It is meaningful for POST and PUT methods; in RBT APIs. Maximum length can be 128 chars.",
+        "required": true,
         "schema": {
           "type": "string"
         }

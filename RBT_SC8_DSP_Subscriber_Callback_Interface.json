@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC8 DSP Subscriber Callback Interface",
     "description": "This document provides the RESTful subscriber callback interface specification of RBT. Client of the interface will be DSP. Server of the interface will be RBT Back-End.",
-    "version": "v2"
+    "version": "v3"
   },
   "servers": [
     {
@@ -37,6 +37,9 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
           }
         ],
         "requestBody": {
@@ -115,7 +118,7 @@
             "type": "string"
           }
         },
-        "description": "Possible errors:\n  - 0 - Success\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 9000 - System failure. Details: \"Error detail\"."
+        "description": "Possible errors:\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 9000 - System failure. Details: \"Error detail\"."
       }
     },
     "parameters": {
@@ -149,6 +152,15 @@
         "name": "X-Username",
         "in": "header",
         "description": "This parameter is used to track the user of the API; log purposes only. Maximum length can be 128 chars.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "transactionIdParam": {
+        "name": "X-TransactionId",
+        "in": "header",
+        "description": "This parameter is used to track the API method transaction; log purposes only. It is meaningful for POST and PUT methods; in RBT APIs. Maximum length can be 128 chars.",
+        "required": true,
         "schema": {
           "type": "string"
         }
