@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC5 DSP Recommendation Interface",
     "description": "This document provides the RESTful recommendation interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v3"
+    "version": "v4"
   },
   "servers": [
     {
@@ -65,6 +65,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -133,6 +136,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -199,6 +205,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",

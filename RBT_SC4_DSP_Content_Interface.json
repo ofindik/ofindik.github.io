@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC4 DSP Content Interface",
     "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v4"
+    "version": "v5"
   },
   "servers": [
     {
@@ -63,6 +63,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -120,6 +123,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -179,6 +185,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -244,6 +253,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -301,6 +313,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -366,6 +381,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -430,6 +448,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -487,6 +508,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -552,6 +576,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -613,6 +640,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -670,6 +700,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -735,6 +768,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -796,6 +832,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -853,6 +892,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -918,6 +960,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -978,6 +1023,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -1040,6 +1088,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -1101,6 +1152,9 @@
               }
             }
           },
+          "401": {
+            "description": "Not Authorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -1161,6 +1215,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not Authorized"
           },
           "500": {
             "description": "Internal Server Error",
