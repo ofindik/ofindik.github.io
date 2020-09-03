@@ -45,6 +45,9 @@
             "$ref": "#/components/parameters/msisdnParam"
           },
           {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
             "$ref": "#/components/parameters/channelParam"
           },
           {
@@ -329,6 +332,9 @@
             "$ref": "#/components/parameters/msisdnParam"
           },
           {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
             "$ref": "#/components/parameters/channelParam"
           },
           {
@@ -454,6 +460,9 @@
           },
           {
             "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/languageParam"
           },
           {
             "$ref": "#/components/parameters/channelParam"
@@ -1074,6 +1083,15 @@
         "name": "X-Msisdn",
         "in": "header",
         "description": "MSISDN of the subscriber",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "languageParam": {
+        "name": "X-Language",
+        "in": "header",
+        "description": "Language of the subscriber. Possible values are;\n  - EN\n  - AR",
         "required": true,
         "schema": {
           "type": "string"
