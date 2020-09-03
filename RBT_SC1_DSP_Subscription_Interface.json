@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
     "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v4"
+    "version": "v5"
   },
   "servers": [
     {
@@ -12,15 +12,27 @@
   ],
   "tags": [
     {
-      "name": "SC1",
-      "description": "Operations for RBT Service Contract 1"
+      "name": "Service Offer Subscription",
+      "description": "Operations for serviceOfferSubscriptions"
+    },
+    {
+      "name": "Content Offer Following",
+      "description": "Operations for contentOfferFollowing"
+    },
+    {
+      "name": "Content Offer Subscription",
+      "description": "Operations for contentOfferSubscriptions"
+    },
+    {
+      "name": "Confirmation",
+      "description": "Operations for confirmations"
     }
   ],
   "paths": {
     "/rbt/v1/serviceOfferSubscriptions": {
       "get": {
         "tags": [
-          "SC1"
+          "Service Offer Subscription"
         ],
         "summary": "Queries the service offer subscriptions",
         "description": "This method is used to query all service offer subscriptions of a subscriber identified with {san}. Service offer details can be retrieved with methods of SC3.",
@@ -82,7 +94,7 @@
       },
       "post": {
         "tags": [
-          "SC1"
+          "Service Offer Subscription"
         ],
         "summary": "Initiates a new service offer subscription",
         "description": "This method is used to initiate a new service offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
@@ -158,7 +170,7 @@
     "/rbt/v1/serviceOfferSubscriptions/{subscriptionId}/state": {
       "put": {
         "tags": [
-          "SC1"
+          "Service Offer Subscription"
         ],
         "summary": "Updates a service offer subscription",
         "description": "This method is used to update a service offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
@@ -227,10 +239,211 @@
         ]
       }
     },
+    "/rbt/v1/contentOfferFollowings": {
+      "post": {
+        "tags": [
+          "Content Offer Following"
+        ],
+        "summary": "Initiates a new content offer following",
+        "description": "This method is used to initiate a new content offer following.",
+        "operationId": "newContentOfferFollowing",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentOffer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "New Content Offer Following is Defined",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FollowingId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Content Offer Following"
+        ],
+        "summary": "Queries the content offer followings",
+        "description": "This method is used to query all content offer followings of a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
+        "operationId": "queryContentOfferFollowings",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content Offer Followings are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentOfferFollowings"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/contentOfferFollowings/{followingId}": {
+      "delete": {
+        "tags": [
+          "Content Offer Following"
+        ],
+        "summary": "Deletes a content offer following",
+        "description": "This method is used to delete a content offer following.",
+        "operationId": "updateContentOfferFollowing",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/followingIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content Offer Following Request is Deleted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
     "/rbt/v1/contentOfferSubscriptions": {
       "get": {
         "tags": [
-          "SC1"
+          "Content Offer Subscription"
         ],
         "summary": "Queries the content offer subscriptions",
         "description": "This method is used to query all content offer subscriptions of a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
@@ -292,7 +505,7 @@
       },
       "post": {
         "tags": [
-          "SC1"
+          "Content Offer Subscription"
         ],
         "summary": "Initiates a new content offer subscription",
         "description": "This method is used to initiate a new content offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
@@ -368,7 +581,7 @@
     "/rbt/v1/contentOfferSubscriptions/{subscriptionId}/state": {
       "put": {
         "tags": [
-          "SC1"
+          "Content Offer Subscription"
         ],
         "summary": "Updates a content offer subscription",
         "description": "This method is used to update a content offer subscription. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
@@ -437,149 +650,10 @@
         ]
       }
     },
-    "/rbt/v1/gift/contentOfferSubscriptions": {
-      "get": {
-        "tags": [
-          "SC1"
-        ],
-        "summary": "Queries the content offer subscriptions gifted by this user",
-        "description": "This method is used to query all content offer subscriptions gifted by a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
-        "operationId": "queryGiftedContentOfferSubscriptions",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/sanParam"
-          },
-          {
-            "$ref": "#/components/parameters/msisdnParam"
-          },
-          {
-            "$ref": "#/components/parameters/channelParam"
-          },
-          {
-            "$ref": "#/components/parameters/usernameParam"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Gifted Content Offer Subscriptions are Retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GiftedContentOfferSubscriptions"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Not Authorized"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "basic_security": []
-          }
-        ]
-      }
-    },
-    "/rbt/v1/gift/contentOfferSubscriptions/{subscriptionId}/state": {
-      "put": {
-        "tags": [
-          "SC1"
-        ],
-        "summary": "Updates a content offer subscription gifted by this user",
-        "description": "This method is used to update a content offer subscription gifted by a subscriber identified with {san}. Subscription states will be notified with \"PutSubscriptionNotification\" method.",
-        "operationId": "updateGiftedContentOfferSubscription",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/sanParam"
-          },
-          {
-            "$ref": "#/components/parameters/msisdnParam"
-          },
-          {
-            "$ref": "#/components/parameters/giftReceiverParam"
-          },
-          {
-            "$ref": "#/components/parameters/channelParam"
-          },
-          {
-            "$ref": "#/components/parameters/usernameParam"
-          },
-          {
-            "$ref": "#/components/parameters/transactionIdParam"
-          },
-          {
-            "$ref": "#/components/parameters/subscriptionIdParam"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Status"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Update Gifted Content Offer Subscription Request is Submitted"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Not Authorized"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "basic_security": []
-          }
-        ]
-      }
-    },
     "/confirmations": {
       "put": {
         "tags": [
-          "SC1"
+          "Confirmation"
         ],
         "summary": "Returns the result of confirmation",
         "description": "This method is used to return the result of \"GetConfirmationFromUser\" method.",
@@ -729,7 +803,74 @@
           }
         }
       },
+      "FollowingId": {
+        "required": [
+          "followingId"
+        ],
+        "type": "object",
+        "properties": {
+          "followingId": {
+            "type": "string",
+            "description": "Identifier of the following",
+            "example": "10001"
+          }
+        }
+      },
+      "ContentOfferFollowings": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ContentOfferFollowing"
+        }
+      },
+      "ContentOfferFollowing": {
+        "required": [
+          "followingId",
+          "contentId",
+          "contentName",
+          "followingType"
+        ],
+        "type": "object",
+        "properties": {
+          "followingId": {
+            "type": "string",
+            "description": "Identifier of the following",
+            "example": "10002"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "Identifier of the content",
+            "example": "40001"
+          },
+          "contentName": {
+            "type": "string",
+            "description": "Name of the content",
+            "example": "Tone A"
+          },
+          "followingType": {
+            "type": "string",
+            "description": "Possible values are:\n  - Album\n  - Artist\n  - Category\n  - Mood",
+            "example": "Album"
+          }
+        }
+      },
       "ContentOfferSubscriptions": {
+        "required": [
+          "subscriptions"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptions": {
+            "$ref": "#/components/schemas/ContentOfferSubscriptionArray"
+          },
+          "receivedgifts": {
+            "$ref": "#/components/schemas/GiftOfferSubscriptionArray"
+          },
+          "sentgifts": {
+            "$ref": "#/components/schemas/GiftOfferSubscriptionArray"
+          }
+        }
+      },
+      "ContentOfferSubscriptionArray": {
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/ContentOfferSubscription"
@@ -741,8 +882,7 @@
           "contentId",
           "contentName",
           "subscriptionType",
-          "state",
-          "isGift"
+          "state"
         ],
         "type": "object",
         "properties": {
@@ -763,7 +903,53 @@
           },
           "subscriptionType": {
             "type": "string",
-            "description": "Possible values are:\n  - Tone\n  - Artist\n  - Category\n  - Mood\n  - SubscriptionList",
+            "description": "Possible values are:\n  - Tone\n  - Album\n  - Artist\n  - Category\n  - Mood",
+            "example": "Tone"
+          },
+          "state": {
+            "type": "string",
+            "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
+            "example": "Active"
+          }
+        }
+      },
+      "GiftOfferSubscriptionArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/GiftOfferSubscription"
+        }
+      },
+      "GiftOfferSubscription": {
+        "required": [
+          "subscriptionId",
+          "contentId",
+          "contentName",
+          "subscriptionType",
+          "state",
+          "giftSender",
+          "giftReceiver",
+          "giftPaymentShape"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "Identifier of the subscription",
+            "example": "10002"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "Identifier of the content",
+            "example": "40001"
+          },
+          "contentName": {
+            "type": "string",
+            "description": "Name of the content",
+            "example": "Tone A"
+          },
+          "subscriptionType": {
+            "type": "string",
+            "description": "Possible values are:\n  - Tone\n  - Album\n  - Artist\n  - Category\n  - Mood",
             "example": "Tone"
           },
           "state": {
@@ -771,14 +957,15 @@
             "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
             "example": "Active"
           },
-          "isGift": {
-            "type": "boolean",
-            "description": "Flag identifiying the gift status of subscription. If \"isGift\" is true, \"giftSender\" and \"paymentShape\" information will be returned."
-          },
           "giftSender": {
             "type": "string",
             "description": "MSISDN of the gift sender",
             "example": "966561234567"
+          },
+          "giftReceiver": {
+            "type": "string",
+            "description": "MSISDN of the gift receiver",
+            "example": "966561234568"
           },
           "giftPaymentShape": {
             "type": "string",
@@ -802,7 +989,7 @@
           },
           "subscriptionType": {
             "type": "string",
-            "description": "Possible values are:\n  - Tone\n  - Artist\n  - Category\n  - Mood\n  - SubscriptionList",
+            "description": "Possible values are:\n  - Tone\n  - Album\n  - Artist\n  - Category\n  - Mood",
             "example": "Tone"
           },
           "language": {
@@ -818,61 +1005,6 @@
             "type": "string",
             "description": "Possible values are:\n  - EN\n  - AR",
             "example": "EN"
-          },
-          "giftReceiver": {
-            "type": "string",
-            "description": "MSISDN of the gift receiver",
-            "example": "966561234567"
-          },
-          "giftPaymentShape": {
-            "type": "string",
-            "description": "Possible values are:\n  - All\n  - Initial",
-            "example": "All"
-          }
-        }
-      },
-      "GiftedContentOfferSubscriptions": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/GiftedContentOfferSubscription"
-        }
-      },
-      "GiftedContentOfferSubscription": {
-        "required": [
-          "subscriptionId",
-          "contentId",
-          "contentName",
-          "subscriptionType",
-          "state",
-          "giftReceiver",
-          "giftPaymentShape"
-        ],
-        "type": "object",
-        "properties": {
-          "subscriptionId": {
-            "type": "string",
-            "description": "Identifier of the subscription",
-            "example": "10002"
-          },
-          "contentId": {
-            "type": "string",
-            "description": "Identifier of the content",
-            "example": "40001"
-          },
-          "contentName": {
-            "type": "string",
-            "description": "Name of the content",
-            "example": "Tone A"
-          },
-          "subscriptionType": {
-            "type": "string",
-            "description": "Possible values are:\n  - Tone\n  - Artist\n  - Category\n  - Mood\n  - SubscriptionList",
-            "example": "Tone"
-          },
-          "state": {
-            "type": "string",
-            "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
-            "example": "Active"
           },
           "giftReceiver": {
             "type": "string",
@@ -981,10 +1113,10 @@
           "type": "string"
         }
       },
-      "giftReceiverParam": {
-        "name": "X-GiftReceiver",
-        "in": "header",
-        "description": "MSISDN of the gift receiver",
+      "followingIdParam": {
+        "name": "followingId",
+        "in": "path",
+        "description": "Identifier of the following",
         "required": true,
         "schema": {
           "type": "string"
