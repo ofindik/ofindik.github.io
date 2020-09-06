@@ -2097,6 +2097,97 @@
           }
         }
       },
+      "BaseTone": {
+        "required": [
+          "id",
+          "name",
+          "description",
+          "price",
+          "subscriptionCode",
+          "chargingPeriod",
+          "currentSubscriptions",
+          "updateTime",
+          "length",
+          "toneUrl",
+          "tags"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the tone",
+            "example": "1111"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the tone",
+            "example": "Tone A"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the tone",
+            "example": "Tone A Description"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the tone",
+            "example": "5"
+          },
+          "subscriptionCode": {
+            "type": "string",
+            "description": "Subscription code of the tone",
+            "example": "11022"
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the tone",
+            "example": "P000Y000M030DT00H00M00S"
+          },
+          "currentSubscriptions": {
+            "type": "integer",
+            "description": "Active subscription count of the tone indicating popularity",
+            "example": 1000
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "Last update time of the tone in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "length": {
+            "type": "integer",
+            "description": "Length of the tone in seconds",
+            "example": 150
+          },
+          "toneUrl": {
+            "type": "string",
+            "description": "Tone content address in URL format",
+            "example": "http://<dsp_cms_vip>/ccc"
+          },
+          "tags": {
+            "$ref": "#/components/schemas/TagArray"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "Thumbnail of the tone in URL format",
+            "example": "http://<dsp_cms_vip>/xxx"
+          },
+          "cardImage": {
+            "type": "string",
+            "description": "Card image of the tone in URL format",
+            "example": "http://<dsp_cms_vip>/yyy"
+          },
+          "pageCoverImage": {
+            "type": "string",
+            "description": "Page cover image of the tone in URL format",
+            "example": "http://<dsp_cms_vip>/zzz"
+          },
+          "gender": {
+            "type": "string",
+            "description": "Possible values are:\n  - Male\n  - Female",
+            "example": "Male"
+          }
+        }
+      },
       "TagArray": {
         "type": "array",
         "items": {
@@ -2198,7 +2289,7 @@
             "$ref": "#/components/schemas/TagArray"
           },
           "defaultTone": {
-            "$ref": "#/components/schemas/Tone"
+            "$ref": "#/components/schemas/BaseTone"
           },
           "thumbnail": {
             "type": "string",
@@ -2293,7 +2384,7 @@
             "$ref": "#/components/schemas/TagArray"
           },
           "defaultTone": {
-            "$ref": "#/components/schemas/Tone"
+            "$ref": "#/components/schemas/BaseTone"
           },
           "thumbnail": {
             "type": "string",
@@ -2393,7 +2484,7 @@
             "$ref": "#/components/schemas/TagArray"
           },
           "defaultTone": {
-            "$ref": "#/components/schemas/Tone"
+            "$ref": "#/components/schemas/BaseTone"
           },
           "thumbnail": {
             "type": "string",
@@ -2488,7 +2579,7 @@
             "$ref": "#/components/schemas/TagArray"
           },
           "defaultTone": {
-            "$ref": "#/components/schemas/Tone"
+            "$ref": "#/components/schemas/BaseTone"
           },
           "thumbnail": {
             "type": "string",
