@@ -352,7 +352,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Tones"
+                  "$ref": "#/components/schemas/BaseTones"
                 }
               }
             }
@@ -781,7 +781,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Tones"
+                  "$ref": "#/components/schemas/BaseTones"
                 }
               }
             }
@@ -1061,7 +1061,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Tones"
+                  "$ref": "#/components/schemas/BaseTones"
                 }
               }
             }
@@ -1341,7 +1341,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Tones"
+                  "$ref": "#/components/schemas/BaseTones"
                 }
               }
             }
@@ -2095,6 +2095,23 @@
           "moods": {
             "$ref": "#/components/schemas/MoodArray"
           }
+        }
+      },
+      "BaseTones": {
+        "required": [
+          "tones"
+        ],
+        "type": "object",
+        "properties": {
+          "tones": {
+            "$ref": "#/components/schemas/BaseToneArray"
+          }
+        }
+      },
+      "BaseToneArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/BaseTone"
         }
       },
       "BaseTone": {
