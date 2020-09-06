@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC2 DSP Subscriber Interface",
     "description": "This document provides the RESTful subscriber interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v4"
+    "version": "v5"
   },
   "servers": [
     {
@@ -12,15 +12,15 @@
   ],
   "tags": [
     {
-      "name": "SC2",
-      "description": "Operations for RBT Service Contract 2"
+      "name": "Subscribers",
+      "description": "Operations for Mobily subscribers"
     }
   ],
   "paths": {
     "/rbt/v1/subscribers": {
       "get": {
         "tags": [
-          "SC2"
+          "Subscribers"
         ],
         "summary": "Queries a subscriber",
         "description": "This method is used to query a subscriber identified with {msisdn}.",

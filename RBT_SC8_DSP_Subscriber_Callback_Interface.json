@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC8 DSP Subscriber Callback Interface",
     "description": "This document provides the RESTful subscriber callback interface specification of RBT. Client of the interface will be DSP. Server of the interface will be RBT Back-End.",
-    "version": "v4"
+    "version": "v5"
   },
   "servers": [
     {
@@ -12,15 +12,15 @@
   ],
   "tags": [
     {
-      "name": "SC8",
-      "description": "Operations for RBT Service Contract 8"
+      "name": "Subscribers",
+      "description": "Operations for subscribers"
     }
   ],
   "paths": {
     "/rbt/v1/subscribers": {
       "put": {
         "tags": [
-          "SC8"
+          "Subscribers"
         ],
         "summary": "Sends update notifications for a subscriber",
         "description": "This method is used to send update notifications for a subscriber.",

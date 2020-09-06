@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC1 DSP Subscription Callback Interface",
     "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP. Server of the interface will be RBT Back-End.",
-    "version": "v3"
+    "version": "v4"
   },
   "servers": [
     {
@@ -12,15 +12,23 @@
   ],
   "tags": [
     {
-      "name": "SC1",
-      "description": "Operations for RBT Service Contract 1"
+      "name": "Confirmations",
+      "description": "Operations for confirmations"
+    },
+    {
+      "name": "Notifications",
+      "description": "Operations for notifications"
+    },
+    {
+      "name": "Subscriptions",
+      "description": "Operations for subscriptions"
     }
   ],
   "paths": {
     "/rbt/v1/confirmations": {
       "put": {
         "tags": [
-          "SC1"
+          "Confirmations"
         ],
         "summary": "Requests the confirmation of a subscriber",
         "description": "This method is used to request confirmation from a subscriber identified with {san}.",
@@ -89,7 +97,7 @@
     "/rbt/v1/notifications": {
       "put": {
         "tags": [
-          "SC1"
+          "Notifications"
         ],
         "summary": "Sends a notification to a subscriber",
         "description": "This method is used to send a notification to a subscriber identified with {san}.",
@@ -158,7 +166,7 @@
     "/rbt/v1/subscriptions": {
       "put": {
         "tags": [
-          "SC1"
+          "Subscriptions"
         ],
         "summary": "Sends subscription state notifications for a subscriber",
         "description": "This method is used to send subscription state notifications for a subscriber identified with {san}.",

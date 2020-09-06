@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC3 DSP Service Interface",
     "description": "This document provides the RESTful service interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v4"
+    "version": "v5"
   },
   "servers": [
     {
@@ -12,20 +12,23 @@
   ],
   "tags": [
     {
-      "name": "SC3",
-      "description": "Operations for RBT Service Contract 3"
+      "name": "Offers",
+      "description": "Operations for RBT offers"
     }
   ],
   "paths": {
     "/rbt/v1/offers": {
       "get": {
         "tags": [
-          "SC3"
+          "Offers"
         ],
         "summary": "Queries the offers",
         "description": "This method is used to query all offers.",
         "operationId": "queryOffers",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
           {
             "$ref": "#/components/parameters/channelParam"
           },
@@ -78,12 +81,15 @@
     "/rbt/v1/offers/{offerId}": {
       "get": {
         "tags": [
-          "SC3"
+          "Offers"
         ],
         "summary": "Queries an offer",
         "description": "This method is used to query an offer identified by {offerId}.",
         "operationId": "queryOffer",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
           {
             "$ref": "#/components/parameters/channelParam"
           },
@@ -180,6 +186,21 @@
             "description": "Charging period of the offer",
             "example": "P000Y000M030DT00H00M00S"
           },
+          "thumbnail": {
+            "type": "string",
+            "description": "Thumbnail of the offer in URL format",
+            "example": "http://<dsp_cms_vip>/xxx"
+          },
+          "cardImage": {
+            "type": "string",
+            "description": "Card image of the offer in URL format",
+            "example": "http://<dsp_cms_vip>/yyy"
+          },
+          "pageCoverImage": {
+            "type": "string",
+            "description": "Page cover image of the offer in URL format",
+            "example": "http://<dsp_cms_vip>/zzz"
+          },
           "parentId": {
             "type": "string",
             "description": "Identifier of the parent offer",
@@ -210,6 +231,15 @@
       }
     },
     "parameters": {
+      "languageParam": {
+        "name": "X-Language",
+        "in": "header",
+        "description": "Language of the subscriber. Possible values are;\n  - EN\n  - AR",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "channelParam": {
         "name": "X-Channel",
         "in": "header",

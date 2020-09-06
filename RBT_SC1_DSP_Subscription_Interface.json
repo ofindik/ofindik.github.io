@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
     "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v6"
+    "version": "v7"
   },
   "servers": [
     {
@@ -243,80 +243,6 @@
       }
     },
     "/rbt/v1/contentOfferFollowings": {
-      "post": {
-        "tags": [
-          "Content Offer Following"
-        ],
-        "summary": "Initiates a new content offer following",
-        "description": "This method is used to initiate a new content offer following.",
-        "operationId": "newContentOfferFollowing",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/sanParam"
-          },
-          {
-            "$ref": "#/components/parameters/msisdnParam"
-          },
-          {
-            "$ref": "#/components/parameters/channelParam"
-          },
-          {
-            "$ref": "#/components/parameters/usernameParam"
-          },
-          {
-            "$ref": "#/components/parameters/transactionIdParam"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContentOfferFollowing"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "New Content Offer Following is Defined",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FollowingId"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Not Authorized"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "basic_security": []
-          }
-        ]
-      },
       "get": {
         "tags": [
           "Content Offer Following"
@@ -383,14 +309,14 @@
         ]
       }
     },
-    "/rbt/v1/contentOfferFollowings/{followingId}": {
-      "delete": {
+    "/rbt/v1/contentOfferFollowings/{contentId}": {
+      "put": {
         "tags": [
           "Content Offer Following"
         ],
-        "summary": "Deletes a content offer following",
-        "description": "This method is used to delete a content offer following.",
-        "operationId": "updateContentOfferFollowing",
+        "summary": "Starts a new content offer following",
+        "description": "This method is used to start a new content offer following.",
+        "operationId": "startContentOfferFollowing",
         "parameters": [
           {
             "$ref": "#/components/parameters/sanParam"
@@ -408,7 +334,68 @@
             "$ref": "#/components/parameters/transactionIdParam"
           },
           {
-            "$ref": "#/components/parameters/followingIdParam"
+            "$ref": "#/components/parameters/contentIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content Offer Following is Started"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Content Offer Following"
+        ],
+        "summary": "Stops a content offer following",
+        "description": "This method is used to stop a content offer following.",
+        "operationId": "stopContentOfferFollowing",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/contentIdParam"
           }
         ],
         "responses": {
@@ -765,6 +752,16 @@
             "type": "string",
             "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
             "example": "Active"
+          },
+          "subscriptionStartDate": {
+            "type": "string",
+            "description": "Subscription start date in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "remainingUsage": {
+            "type": "integer",
+            "description": "Remaining usage of subsciption in days",
+            "example": 14
           }
         }
       },
@@ -812,54 +809,10 @@
           }
         }
       },
-      "FollowingId": {
-        "required": [
-          "followingId"
-        ],
-        "type": "object",
-        "properties": {
-          "followingId": {
-            "type": "string",
-            "description": "Identifier of the following",
-            "example": "10001"
-          }
-        }
-      },
       "ContentOfferFollowings": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/ContentOfferFollowingWithId"
-        }
-      },
-      "ContentOfferFollowingWithId": {
-        "required": [
-          "followingId",
-          "contentId",
-          "contentName",
-          "followingType"
-        ],
-        "type": "object",
-        "properties": {
-          "followingId": {
-            "type": "string",
-            "description": "Identifier of the following",
-            "example": "10002"
-          },
-          "contentId": {
-            "type": "string",
-            "description": "Identifier of the content",
-            "example": "40001"
-          },
-          "contentName": {
-            "type": "string",
-            "description": "Name of the content",
-            "example": "Tone A"
-          },
-          "followingType": {
-            "type": "string",
-            "description": "Possible values are:\n  - Album\n  - Artist\n  - Category\n  - Mood",
-            "example": "Album"
-          }
+          "$ref": "#/components/schemas/ContentOfferFollowing"
         }
       },
       "ContentOfferFollowing": {
@@ -944,6 +897,16 @@
             "type": "string",
             "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
             "example": "Active"
+          },
+          "subscriptionStartDate": {
+            "type": "string",
+            "description": "Subscription start date in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "remainingUsage": {
+            "type": "integer",
+            "description": "Remaining usage of subsciption in days",
+            "example": 14
           }
         }
       },
@@ -990,6 +953,16 @@
             "type": "string",
             "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
             "example": "Active"
+          },
+          "subscriptionStartDate": {
+            "type": "string",
+            "description": "Subscription start date in \"ddMMyyyyThhmm\" format",
+            "example": "22032020T1456"
+          },
+          "remainingUsage": {
+            "type": "integer",
+            "description": "Remaining usage of subsciption in days",
+            "example": 14
           },
           "giftSender": {
             "type": "string",
@@ -1156,10 +1129,10 @@
           "type": "string"
         }
       },
-      "followingIdParam": {
-        "name": "followingId",
+      "contentIdParam": {
+        "name": "contentId",
         "in": "path",
-        "description": "Identifier of the following",
+        "description": "Identifier of the content",
         "required": true,
         "schema": {
           "type": "string"
