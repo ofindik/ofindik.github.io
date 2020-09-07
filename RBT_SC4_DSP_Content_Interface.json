@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC4 DSP Content Interface",
     "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v6"
+    "version": "v7"
   },
   "servers": [
     {
@@ -2208,26 +2208,8 @@
       "TagArray": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/Tag"
-        }
-      },
-      "Tag": {
-        "required": [
-          "key",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "Key of the tag",
-            "example": "Channel"
-          },
-          "value": {
-            "type": "string",
-            "description": "Value of the tag",
-            "example": "USSD"
-          }
+          "type": "string",
+          "example": "USSD"
         }
       },
       "Albums": {
@@ -2384,7 +2366,7 @@
           },
           "chargingPeriod": {
             "type": "string",
-            "description": "Charging period of the tone",
+            "description": "Charging period of the artist",
             "example": "P000Y000M030DT00H00M00S"
           },
           "currentSubscriptions": {
@@ -2484,7 +2466,7 @@
           },
           "chargingPeriod": {
             "type": "string",
-            "description": "Charging period of the tone",
+            "description": "Charging period of the category",
             "example": "P000Y000M030DT00H00M00S"
           },
           "currentSubscriptions": {
