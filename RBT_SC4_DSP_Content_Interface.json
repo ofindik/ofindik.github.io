@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC4 DSP Content Interface",
     "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v7"
+    "version": "v1.0.1"
   },
   "servers": [
     {
@@ -78,7 +78,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Tones"
+                  "$ref": "#/components/schemas/BaseTones"
                 }
               }
             }
@@ -2002,7 +2002,7 @@
           "price",
           "subscriptionCode",
           "chargingPeriod",
-          "currentSubscriptions",
+          "currentSubscriptionCount",
           "updateTime",
           "length",
           "toneUrl",
@@ -2040,7 +2040,7 @@
             "description": "Charging period of the tone",
             "example": "P000Y000M030DT00H00M00S"
           },
-          "currentSubscriptions": {
+          "currentSubscriptionCount": {
             "type": "integer",
             "description": "Active subscription count of the tone indicating popularity",
             "example": 1000
@@ -2122,7 +2122,7 @@
           "price",
           "subscriptionCode",
           "chargingPeriod",
-          "currentSubscriptions",
+          "currentSubscriptionCount",
           "updateTime",
           "length",
           "toneUrl",
@@ -2160,7 +2160,7 @@
             "description": "Charging period of the tone",
             "example": "P000Y000M030DT00H00M00S"
           },
-          "currentSubscriptions": {
+          "currentSubscriptionCount": {
             "type": "integer",
             "description": "Active subscription count of the tone indicating popularity",
             "example": 1000
@@ -2237,7 +2237,7 @@
           "price",
           "subscriptionCode",
           "chargingPeriod",
-          "currentSubscriptions",
+          "currentSubscriptionCount",
           "updateTime",
           "tags",
           "defaultTone"
@@ -2274,7 +2274,7 @@
             "description": "Charging period of the album",
             "example": "P000Y000M030DT00H00M00S"
           },
-          "currentSubscriptions": {
+          "currentSubscriptionCount": {
             "type": "integer",
             "description": "Active subscription count of the album indicating popularity",
             "example": 1000
@@ -2332,7 +2332,7 @@
           "price",
           "subscriptionCode",
           "chargingPeriod",
-          "currentSubscriptions",
+          "currentSubscriptionCount",
           "updateTime",
           "tags",
           "defaultTone"
@@ -2369,7 +2369,7 @@
             "description": "Charging period of the artist",
             "example": "P000Y000M030DT00H00M00S"
           },
-          "currentSubscriptions": {
+          "currentSubscriptionCount": {
             "type": "integer",
             "description": "Active subscription count of the artist indicating popularity",
             "example": 1000
@@ -2432,7 +2432,7 @@
           "price",
           "subscriptionCode",
           "chargingPeriod",
-          "currentSubscriptions",
+          "currentSubscriptionCount",
           "updateTime",
           "tags",
           "defaultTone"
@@ -2469,7 +2469,7 @@
             "description": "Charging period of the category",
             "example": "P000Y000M030DT00H00M00S"
           },
-          "currentSubscriptions": {
+          "currentSubscriptionCount": {
             "type": "integer",
             "description": "Active subscription count of the category indicating popularity",
             "example": 1000
@@ -2527,7 +2527,7 @@
           "price",
           "subscriptionCode",
           "chargingPeriod",
-          "currentSubscriptions",
+          "currentSubscriptionCount",
           "updateTime",
           "tags",
           "defaultTone"
@@ -2564,7 +2564,7 @@
             "description": "Charging period of the mood",
             "example": "P000Y000M030DT00H00M00S"
           },
-          "currentSubscriptions": {
+          "currentSubscriptionCount": {
             "type": "integer",
             "description": "Active subscription count of the mood indicating popularity",
             "example": 1000
