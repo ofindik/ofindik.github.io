@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC4 DSP Content Interface",
     "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.0.1"
+    "version": "v1.0.2"
   },
   "servers": [
     {
@@ -1475,7 +1475,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Tones"
+                  "$ref": "#/components/schemas/BaseTones"
                 }
               }
             }
@@ -1728,7 +1728,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Tones"
+                  "$ref": "#/components/schemas/BaseTones"
                 }
               }
             }
