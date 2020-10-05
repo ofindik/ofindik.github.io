@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "RBT SC39 SMS/RBTApp Notification Interface",
-    "description": "This document provides the RESTful SMS/RBTApp notification interface specification of RBT. Client of the interface will be DSP CSSM and RBT Back-End. Server of the interface will be DSP SC Gateway.",
+    "title": "RBT SC39 SMS Notification Interface",
+    "description": "This document provides the RESTful SMS notification interface specification of RBT. Client of the interface will be DSP RBT Back-End. Server of the interface will be DSP SC Gateway.",
     "version": "v1.0.1"
   },
   "servers": [
@@ -12,23 +12,19 @@
   ],
   "tags": [
     {
-      "name": "Confirmations",
-      "description": "Operations for confirmations"
-    },
-    {
-      "name": "Notifications",
-      "description": "Operations for notifications"
+      "name": "SMS Notifications",
+      "description": "Operations for SMS notifications"
     }
   ],
   "paths": {
-    "/rbt/v1/confirmations": {
+    "/rbt/v1/smsNotifications": {
       "put": {
         "tags": [
-          "Confirmations"
+          "SMS Notifications"
         ],
-        "summary": "Requests the confirmation of a subscriber through SMS and RBT Application",
-        "description": "This method is used to request confirmation from a subscriber identified with {san} through SMS and RBT Application.",
-        "operationId": "requestConfirmationFromUser",
+        "summary": "Sends a notification to a subscriber through SMS",
+        "description": "This method is used to send a notification to a subscriber identified with {san} through SMS.",
+        "operationId": "sendSmsNotificationToUser",
         "parameters": [
           {
             "$ref": "#/components/parameters/sanParam"
@@ -50,83 +46,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ConfirmationRequest"
+                "$ref": "#/components/schemas/SmsNotificationRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Confirmation Request is Submitted"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Not Authorized"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "basic_security": []
-          }
-        ]
-      }
-    },
-    "/rbt/v1/notifications": {
-      "put": {
-        "tags": [
-          "Notifications"
-        ],
-        "summary": "Sends a notification to a subscriber through SMS and RBT Application",
-        "description": "This method is used to send a notification to a subscriber identified with {san} through SMS and RBT Application.",
-        "operationId": "sendNotificationToUser",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/sanParam"
-          },
-          {
-            "$ref": "#/components/parameters/msisdnParam"
-          },
-          {
-            "$ref": "#/components/parameters/channelParam"
-          },
-          {
-            "$ref": "#/components/parameters/usernameParam"
-          },
-          {
-            "$ref": "#/components/parameters/transactionIdParam"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NotificationRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Notification Request is Submitted"
+            "description": "SMS Notification Request is Submitted"
           },
           "400": {
             "description": "Bad Request",
@@ -162,32 +89,7 @@
   },
   "components": {
     "schemas": {
-      "ConfirmationRequest": {
-        "required": [
-          "notificationText",
-          "options",
-          "confirmationId"
-        ],
-        "type": "object",
-        "properties": {
-          "notificationText": {
-            "type": "string",
-            "description": "Text that will be shown to the user",
-            "example": "Please confirm your RBT offer subscription gift send by XXXX?"
-          },
-          "options": {
-            "type": "string",
-            "description": "Options that will be shown to the user",
-            "example": "Yes,No"
-          },
-          "confirmationId": {
-            "type": "string",
-            "description": "Identifier of the confirmation request",
-            "example": "1111"
-          }
-        }
-      },
-      "NotificationRequest": {
+      "SmsNotificationRequest": {
         "required": [
           "text"
         ],
@@ -197,6 +99,11 @@
             "type": "string",
             "description": "Text that will be shown to the user",
             "example": "Your RBT offer subscription is renewed for X Riyal."
+          },
+          "sender": {
+            "type": "string",
+            "description": "Alphanumeric source address of the SMS",
+            "example": "RBT"
           }
         }
       },
