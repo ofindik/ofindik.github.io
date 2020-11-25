@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC4 DSP Content Interface",
     "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.0.2"
+    "version": "v1.0.3"
   },
   "servers": [
     {
@@ -2047,7 +2047,7 @@
           },
           "updateTime": {
             "type": "string",
-            "description": "Last update time of the tone in \"ddMMyyyyThhmm\" format",
+            "description": "Last update time of the tone in \"ddMMyyyyTHHmm\" format",
             "example": "22032020T1456"
           },
           "length": {
@@ -2167,7 +2167,7 @@
           },
           "updateTime": {
             "type": "string",
-            "description": "Last update time of the tone in \"ddMMyyyyThhmm\" format",
+            "description": "Last update time of the tone in \"ddMMyyyyTHHmm\" format",
             "example": "22032020T1456"
           },
           "length": {
@@ -2281,7 +2281,7 @@
           },
           "updateTime": {
             "type": "string",
-            "description": "Last update time of the album in \"ddMMyyyyThhmm\" format",
+            "description": "Last update time of the album in \"ddMMyyyyTHHmm\" format",
             "example": "22032020T1456"
           },
           "tags": {
@@ -2376,7 +2376,7 @@
           },
           "updateTime": {
             "type": "string",
-            "description": "Last update time of the artist in \"ddMMyyyyThhmm\" format",
+            "description": "Last update time of the artist in \"ddMMyyyyTHHmm\" format",
             "example": "22032020T1456"
           },
           "tags": {
@@ -2476,7 +2476,7 @@
           },
           "updateTime": {
             "type": "string",
-            "description": "Last update time of the category in \"ddMMyyyyThhmm\" format",
+            "description": "Last update time of the category in \"ddMMyyyyTHHmm\" format",
             "example": "22032020T1456"
           },
           "tags": {
@@ -2571,7 +2571,7 @@
           },
           "updateTime": {
             "type": "string",
-            "description": "Last update time of the mood in \"ddMMyyyyThhmm\" format",
+            "description": "Last update time of the mood in \"ddMMyyyyTHHmm\" format",
             "example": "22032020T1456"
           },
           "tags": {
@@ -2611,7 +2611,7 @@
             "type": "string"
           }
         },
-        "description": "Possible errors:\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 9000 - System failure. Details: \"Error detail\"."
+        "description": "Possible errors:\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 2001 - Content does not exist.\n  - 9000 - System failure. Details: \"Error detail\"."
       }
     },
     "parameters": {

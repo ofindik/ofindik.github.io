@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
     "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.0.1"
+    "version": "v1.0.2"
   },
   "servers": [
     {
@@ -755,7 +755,7 @@
           },
           "subscriptionStartDate": {
             "type": "string",
-            "description": "Subscription start date in \"ddMMyyyyThhmm\" format",
+            "description": "Subscription start date in \"ddMMyyyyTHHmm\" format",
             "example": "22032020T1456"
           },
           "remainingUsage": {
@@ -900,7 +900,7 @@
           },
           "subscriptionStartDate": {
             "type": "string",
-            "description": "Subscription start date in \"ddMMyyyyThhmm\" format",
+            "description": "Subscription start date in \"ddMMyyyyTHHmm\" format",
             "example": "22032020T1456"
           },
           "remainingUsage": {
@@ -956,7 +956,7 @@
           },
           "subscriptionStartDate": {
             "type": "string",
-            "description": "Subscription start date in \"ddMMyyyyThhmm\" format",
+            "description": "Subscription start date in \"ddMMyyyyTHHmm\" format",
             "example": "22032020T1456"
           },
           "remainingUsage": {
@@ -1064,7 +1064,7 @@
             "type": "string"
           }
         },
-        "description": "Possible errors:\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 1004 - Subscription does not exist.\n  - 9000 - System failure. Details: \"Error detail\"."
+        "description": "Possible errors:\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 1004 - Subscription does not exist.\n  - 1005 - Subscription already exists.\n  - 9000 - System failure. Details: \"Error detail\"."
       }
     },
     "parameters": {
@@ -1072,7 +1072,6 @@
         "name": "X-San",
         "in": "header",
         "description": "Service Account Number of the subscriber",
-        "required": true,
         "schema": {
           "type": "string"
         }

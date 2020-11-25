@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC1 DSP Subscription Callback Interface",
     "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP SC Gateway. Server of the interface will be RBT Back-End.",
-    "version": "v1.0.2"
+    "version": "v1.0.3"
   },
   "servers": [
     {
@@ -298,8 +298,8 @@
           },
           "failureReason": {
             "type": "string",
-            "description": "Failure reason for the \"Inactive\" state change.",
-            "example": "HLR flag setting failed"
+            "description": "Failure reason for the \"Inactive\" state change. Possible values are:\n  - SubscriberNotEligible\n  - SubscriberInBlackList\n  - ServiceInactive\n  - RenewalNotConfirmed\n  - OfferInactive\n  - MaxFailedChargingAttemptCountExceeded\n  - InsufficientCredit\n  - SubscriberNotActive\n  - InactivatedBySubscriber\n  - SubscriptionDurationEnded\n  - OfferLastSubscriptionDatePassed\n  - OfferFirstSubscriptionDateNotReached\n  - OfferSuspended\n  - ServiceSuspended\n  - DobNotAllowed\n  - MicroChargingDurationEnds\n  - HlrProvisioningError\n  - ChargingFailure",
+            "example": "InsufficientCredit"
           }
         }
       },
@@ -325,7 +325,6 @@
         "name": "X-San",
         "in": "header",
         "description": "Service Account Number of the subscriber",
-        "required": true,
         "schema": {
           "type": "string"
         }
