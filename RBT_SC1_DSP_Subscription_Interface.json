@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
     "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.1.0"
+    "version": "v1.1.1"
   },
   "servers": [
     {
@@ -1102,7 +1102,12 @@
           "state": {
             "type": "string",
             "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
-            "example": "Active"
+            "example": "Inactive"
+          },
+          "failureReason": {
+            "type": "string",
+            "description": "Failure reason for the \"Inactive\" state. Possible values are:\n  - SubscriberNotEligible\n  - SubscriberInBlackList\n  - ServiceInactive\n  - RenewalNotConfirmed\n  - OfferInactive\n  - MaxFailedChargingAttemptCountExceeded\n  - InsufficientCredit\n  - SubscriberNotActive\n  - InactivatedBySubscriber\n  - SubscriptionDurationEnded\n  - OfferLastSubscriptionDatePassed\n  - OfferFirstSubscriptionDateNotReached\n  - OfferSuspended\n  - ServiceSuspended\n  - DobNotAllowed\n  - MicroChargingDurationEnds\n  - HlrProvisioningError\n  - ChargingFailure",
+            "example": "InsufficientCredit"
           },
           "subscriptionStartDate": {
             "type": "string",
