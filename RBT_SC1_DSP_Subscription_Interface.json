@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
     "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.0.2"
+    "version": "v1.1.0"
   },
   "servers": [
     {
@@ -135,6 +135,76 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SubscriptionId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/serviceOfferSubscriptions/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "Service Offer Subscription"
+        ],
+        "summary": "Queries a service offer subscription",
+        "description": "This method is used to query a service offer subscription of a subscriber identified with {san}. Service offer details can be retrieved with methods of SC3.",
+        "operationId": "queryServiceOfferSubscription",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Offer Subscription is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceOfferSubscription"
                 }
               }
             }
@@ -574,6 +644,76 @@
         ]
       }
     },
+    "/rbt/v1/contentOfferSubscriptions/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "Content Offer Subscription"
+        ],
+        "summary": "Queries a content offer subscription",
+        "description": "This method is used to query a content offer subscription of a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
+        "operationId": "queryContentOfferSubscription",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content Offer Subscription is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentOfferSubscription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
     "/rbt/v1/contentOfferSubscriptions/{subscriptionId}/state": {
       "put": {
         "tags": [
@@ -751,7 +891,12 @@
           "state": {
             "type": "string",
             "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
-            "example": "Active"
+            "example": "Inactive"
+          },
+          "failureReason": {
+            "type": "string",
+            "description": "Failure reason for the \"Inactive\" state. Possible values are:\n  - SubscriberNotEligible\n  - SubscriberInBlackList\n  - ServiceInactive\n  - RenewalNotConfirmed\n  - OfferInactive\n  - MaxFailedChargingAttemptCountExceeded\n  - InsufficientCredit\n  - SubscriberNotActive\n  - InactivatedBySubscriber\n  - SubscriptionDurationEnded\n  - OfferLastSubscriptionDatePassed\n  - OfferFirstSubscriptionDateNotReached\n  - OfferSuspended\n  - ServiceSuspended\n  - DobNotAllowed\n  - MicroChargingDurationEnds\n  - HlrProvisioningError\n  - ChargingFailure",
+            "example": "InsufficientCredit"
           },
           "subscriptionStartDate": {
             "type": "string",
@@ -896,7 +1041,12 @@
           "state": {
             "type": "string",
             "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
-            "example": "Active"
+            "example": "Inactive"
+          },
+          "failureReason": {
+            "type": "string",
+            "description": "Failure reason for the \"Inactive\" state. Possible values are:\n  - SubscriberNotEligible\n  - SubscriberInBlackList\n  - ServiceInactive\n  - RenewalNotConfirmed\n  - OfferInactive\n  - MaxFailedChargingAttemptCountExceeded\n  - InsufficientCredit\n  - SubscriberNotActive\n  - InactivatedBySubscriber\n  - SubscriptionDurationEnded\n  - OfferLastSubscriptionDatePassed\n  - OfferFirstSubscriptionDateNotReached\n  - OfferSuspended\n  - ServiceSuspended\n  - DobNotAllowed\n  - MicroChargingDurationEnds\n  - HlrProvisioningError\n  - ChargingFailure",
+            "example": "InsufficientCredit"
           },
           "subscriptionStartDate": {
             "type": "string",
