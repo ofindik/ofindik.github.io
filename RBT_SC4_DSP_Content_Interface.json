@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC4 DSP Content Interface",
     "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.0.3"
+    "version": "v1.1.0"
   },
   "servers": [
     {
@@ -178,6 +178,70 @@
         ]
       }
     },
+    "/rbt/v1/tones/bySubscriptionCode/{subscriptionCode}": {
+      "get": {
+        "tags": [
+          "Tones"
+        ],
+        "summary": "Queries a tone by subscriptionCode",
+        "description": "This method is used to query a tone identified by {subscriptionCode}.",
+        "operationId": "queryToneBySubscriptionCode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionCodeParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tone is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tone"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
     "/rbt/v1/albums": {
       "get": {
         "tags": [
@@ -271,6 +335,70 @@
           },
           {
             "$ref": "#/components/parameters/albumIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Album is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Album"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/albums/bySubscriptionCode/{subscriptionCode}": {
+      "get": {
+        "tags": [
+          "Albums"
+        ],
+        "summary": "Queries an album by subscriptionCode",
+        "description": "This method is used to query an album identified by {subscriptionCode}.",
+        "operationId": "queryAlbumBySubscriptionCode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionCodeParam"
           }
         ],
         "responses": {
@@ -744,6 +872,70 @@
         ]
       }
     },
+    "/rbt/v1/artists/bySubscriptionCode/{subscriptionCode}": {
+      "get": {
+        "tags": [
+          "Artists"
+        ],
+        "summary": "Queries an artist by subscriptionCode",
+        "description": "This method is used to query an artist identified by {subscriptionCode}.",
+        "operationId": "queryArtistBySubscriptionCode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionCodeParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artist is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
     "/rbt/v1/artists/{artistId}/tones": {
       "get": {
         "tags": [
@@ -1024,6 +1216,70 @@
         ]
       }
     },
+    "/rbt/v1/categories/bySubscriptionCode/{subscriptionCode}": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Queries a category by subscriptionCode",
+        "description": "This method is used to query a category identified by {subscriptionCode}.",
+        "operationId": "queryCategoryBySubscriptionCode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionCodeParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
     "/rbt/v1/categories/{categoryId}/tones": {
       "get": {
         "tags": [
@@ -1260,6 +1516,70 @@
           },
           {
             "$ref": "#/components/parameters/moodIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mood is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mood"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/moods/bySubscriptionCode/{subscriptionCode}": {
+      "get": {
+        "tags": [
+          "Moods"
+        ],
+        "summary": "Queries a mood by subscriptionCode",
+        "description": "This method is used to query a mood identified by {subscriptionCode}.",
+        "operationId": "queryMoodBySubscriptionCode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionCodeParam"
           }
         ],
         "responses": {
@@ -2713,6 +3033,15 @@
         "name": "moodId",
         "in": "path",
         "description": "Identifier of the mood",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "subscriptionCodeParam": {
+        "name": "subscriptionCode",
+        "in": "path",
+        "description": "Code of the subscription",
         "required": true,
         "schema": {
           "type": "string"
