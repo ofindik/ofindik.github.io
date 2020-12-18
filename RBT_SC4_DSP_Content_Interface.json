@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC4 DSP Content Interface",
     "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.1.0"
+    "version": "v1.1.1"
   },
   "servers": [
     {
@@ -2381,7 +2381,9 @@
             "example": "http://<dsp_cms_vip>/ccc"
           },
           "tags": {
-            "$ref": "#/components/schemas/TagArray"
+            "type": "string",
+            "description": "Comma separated list of tag values",
+            "example": "USSD,IVR"
           },
           "thumbnail": {
             "type": "string",
@@ -2501,7 +2503,9 @@
             "example": "http://<dsp_cms_vip>/ccc"
           },
           "tags": {
-            "$ref": "#/components/schemas/TagArray"
+            "type": "string",
+            "description": "Comma separated list of tag values",
+            "example": "USSD,IVR"
           },
           "thumbnail": {
             "type": "string",
@@ -2523,13 +2527,6 @@
             "description": "Possible values are:\n  - Male\n  - Female",
             "example": "Male"
           }
-        }
-      },
-      "TagArray": {
-        "type": "array",
-        "items": {
-          "type": "string",
-          "example": "USSD"
         }
       },
       "Albums": {
@@ -2605,7 +2602,9 @@
             "example": "22032020T1456"
           },
           "tags": {
-            "$ref": "#/components/schemas/TagArray"
+            "type": "string",
+            "description": "Comma separated list of tag values",
+            "example": "USSD,IVR"
           },
           "defaultTone": {
             "$ref": "#/components/schemas/BaseTone"
@@ -2700,7 +2699,9 @@
             "example": "22032020T1456"
           },
           "tags": {
-            "$ref": "#/components/schemas/TagArray"
+            "type": "string",
+            "description": "Comma separated list of tag values",
+            "example": "USSD,IVR"
           },
           "defaultTone": {
             "$ref": "#/components/schemas/BaseTone"
@@ -2800,7 +2801,9 @@
             "example": "22032020T1456"
           },
           "tags": {
-            "$ref": "#/components/schemas/TagArray"
+            "type": "string",
+            "description": "Comma separated list of tag values",
+            "example": "USSD,IVR"
           },
           "defaultTone": {
             "$ref": "#/components/schemas/BaseTone"
@@ -2895,7 +2898,9 @@
             "example": "22032020T1456"
           },
           "tags": {
-            "$ref": "#/components/schemas/TagArray"
+            "type": "string",
+            "description": "Comma separated list of tag values",
+            "example": "USSD,IVR"
           },
           "defaultTone": {
             "$ref": "#/components/schemas/BaseTone"

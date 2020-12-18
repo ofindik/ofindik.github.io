@@ -3,7 +3,7 @@
   "info": {
     "title": "RBT SC1 DSP Subscription Callback Interface",
     "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP SC Gateway. Server of the interface will be RBT Back-End.",
-    "version": "v1.0.3"
+    "version": "v1.0.4"
   },
   "servers": [
     {
@@ -25,7 +25,7 @@
     }
   ],
   "paths": {
-    "/rbt/v1/rbtAppConfirmations": {
+    "/rbt/confirmations/rbtAppConfirmations": {
       "put": {
         "tags": [
           "RBT App Confirmations"
@@ -94,7 +94,7 @@
         ]
       }
     },
-    "/rbt/v1/rbtAppNotifications": {
+    "/rbt/confirmations/rbtAppNotifications": {
       "put": {
         "tags": [
           "RBT App Notifications"
@@ -163,7 +163,7 @@
         ]
       }
     },
-    "/rbt/v1/subscriptions/state": {
+    "/rbt/confirmations/subscriptions/state": {
       "put": {
         "tags": [
           "Subscription State Notifications"
