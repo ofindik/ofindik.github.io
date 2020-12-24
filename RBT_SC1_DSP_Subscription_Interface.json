@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
-    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.1.4"
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.<br/> <br/> Revision History<br/> 1.2.0 - 25.12.2020<br/> - Campaign group added<br/> - Subscriber identifier updated as {msisdn} instead of {san}<br/>",
+    "version": "v1.2.0"
   },
   "servers": [
     {
@@ -26,6 +26,10 @@
     {
       "name": "Confirmation",
       "description": "Operations for confirmations"
+    },
+    {
+      "name": "Campaign",
+      "description": "Operations for campaigns"
     }
   ],
   "paths": {
@@ -35,7 +39,7 @@
           "Service Offer Subscription"
         ],
         "summary": "Queries the service offer subscriptions",
-        "description": "This method is used to query all service offer subscriptions of a subscriber identified with {san}. Service offer details can be retrieved with methods of SC3.",
+        "description": "This method is used to query all service offer subscriptions of a subscriber identified with {msisdn}. Service offer details can be retrieved with methods of SC3.",
         "operationId": "queryServiceOfferSubscriptions",
         "parameters": [
           {
@@ -176,7 +180,7 @@
           "Service Offer Subscription"
         ],
         "summary": "Queries a service offer subscription",
-        "description": "This method is used to query a service offer subscription of a subscriber identified with {san}. Service offer details can be retrieved with methods of SC3.",
+        "description": "This method is used to query a service offer subscription of a subscriber identified with {msisdn}. Service offer details can be retrieved with methods of SC3.",
         "operationId": "queryServiceOfferSubscription",
         "parameters": [
           {
@@ -318,7 +322,7 @@
           "Content Offer Following"
         ],
         "summary": "Queries the content offer followings",
-        "description": "This method is used to query all content offer followings of a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
+        "description": "This method is used to query all content offer followings of a subscriber identified with {msisdn}. Content offer details can be retrieved with methods of SC4.",
         "operationId": "queryContentOfferFollowings",
         "parameters": [
           {
@@ -518,7 +522,7 @@
           "Content Offer Subscription"
         ],
         "summary": "Queries the content offer subscriptions",
-        "description": "This method is used to query all content offer subscriptions of a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
+        "description": "This method is used to query all content offer subscriptions of a subscriber identified with {msisdn}. Content offer details can be retrieved with methods of SC4.",
         "operationId": "queryContentOfferSubscriptions",
         "parameters": [
           {
@@ -659,7 +663,7 @@
           "Content Offer Subscription"
         ],
         "summary": "Queries a content offer subscription",
-        "description": "This method is used to query a content offer subscription of a subscriber identified with {san}. Content offer details can be retrieved with methods of SC4.",
+        "description": "This method is used to query a content offer subscription of a subscriber identified with {msisdn}. Content offer details can be retrieved with methods of SC4.",
         "operationId": "queryContentOfferSubscription",
         "parameters": [
           {
@@ -832,6 +836,137 @@
         "responses": {
           "200": {
             "description": "Confirmation Result is Returned"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/campaigns/eligibility": {
+      "get": {
+        "tags": [
+          "Campaign"
+        ],
+        "summary": "Queries campaign eligibility",
+        "description": "This method is used to query campaign eligibility of a subscriber identified with {msisdn}.",
+        "operationId": "queryCampaignEligibility",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Campaign Eligibility is Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignEligibility"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Campaign"
+        ],
+        "summary": "Updates campaign eligibility",
+        "description": "This method is used to update campaign eligibility of a subscriber identified with {msisdn}.",
+        "operationId": "updateCampaignEligibility",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignEligibility"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Campaign Eligibility is Updated"
           },
           "400": {
             "description": "Bad Request",
@@ -1205,6 +1340,33 @@
             "type": "string",
             "description": "Identifier of the confirmation request",
             "example": "1111"
+          }
+        }
+      },
+      "CampaignEligibility": {
+        "required": [
+          "isIvrEnabled",
+          "isSmsEnabled",
+          "isUssdEnabled",
+          "isMmsEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "isIvrEnabled": {
+            "type": "boolean",
+            "description": "Flag identifiying the campaign eligibility of a subscriber for IVR channel."
+          },
+          "isSmsEnabled": {
+            "type": "boolean",
+            "description": "Flag identifiying the campaign eligibility of a subscriber for SMS channel."
+          },
+          "isUssdEnabled": {
+            "type": "boolean",
+            "description": "Flag identifiying the campaign eligibility of a subscriber for USSD channel."
+          },
+          "isMmsEnabled": {
+            "type": "boolean",
+            "description": "Flag identifiying the campaign eligibility of a subscriber for MMS channel."
           }
         }
       },
