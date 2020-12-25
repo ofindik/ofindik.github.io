@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
-    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.<br/> <br/> Revision History<br/> 1.2.0 - 25.12.2020<br/> - Campaign group added<br/> - Subscriber identifier updated as {msisdn} instead of {san}<br/>",
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |",
     "version": "v1.2.0"
   },
   "servers": [
@@ -868,7 +868,7 @@
         ]
       }
     },
-    "/rbt/v1/campaigns/eligibility": {
+    "/rbt/v1/campaigns/eligibility/{campaignChannel}": {
       "get": {
         "tags": [
           "Campaign"
@@ -888,6 +888,9 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/campaignChannelParam"
           }
         ],
         "responses": {
@@ -953,6 +956,9 @@
           },
           {
             "$ref": "#/components/parameters/transactionIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/campaignChannelParam"
           }
         ],
         "requestBody": {
@@ -1345,28 +1351,13 @@
       },
       "CampaignEligibility": {
         "required": [
-          "isIvrEnabled",
-          "isSmsEnabled",
-          "isUssdEnabled",
-          "isMmsEnabled"
+          "isEnabled"
         ],
         "type": "object",
         "properties": {
-          "isIvrEnabled": {
+          "isEnabled": {
             "type": "boolean",
-            "description": "Flag identifiying the campaign eligibility of a subscriber for IVR channel."
-          },
-          "isSmsEnabled": {
-            "type": "boolean",
-            "description": "Flag identifiying the campaign eligibility of a subscriber for SMS channel."
-          },
-          "isUssdEnabled": {
-            "type": "boolean",
-            "description": "Flag identifiying the campaign eligibility of a subscriber for USSD channel."
-          },
-          "isMmsEnabled": {
-            "type": "boolean",
-            "description": "Flag identifiying the campaign eligibility of a subscriber for MMS channel."
+            "description": "Flag identifiying the campaign eligibility of a subscriber."
           }
         }
       },
@@ -1452,6 +1443,15 @@
         "name": "contentId",
         "in": "path",
         "description": "Identifier of the content",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "campaignChannelParam": {
+        "name": "campaignChannel",
+        "in": "path",
+        "description": "Channel of the campaign. Possible values are;\n  - IVR\n  - USSD\n  - SMS\n  - MMS",
         "required": true,
         "schema": {
           "type": "string"
