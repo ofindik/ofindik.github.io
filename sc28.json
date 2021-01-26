@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT Backend App SC28",
-    "description": "This document provides the RBT Backend REST API interface. Client of the interface will be RBT App/RBT Portal/DSP (IVR, USSD, SMS). Server of interface will be RBT Backend.\nTest Server for RBT Backend REST API FOR SC28 defined as below.\nhttp://rbtapitest.mobily.com.sa/API",
+    "description": "This document provides the RBT Backend REST API interface. Client of the interface will be RBT App/RBT Portal/DSP (IVR, USSD, SMS). Server of interface will be RBT Backend.\n\nTest Server for RBT Backend REST API FOR SC28 defined as below.\n\nhttp://rbtapitest.mobily.com.sa/API",
     "version": "v1.0.8.3"
   },
   "servers": [
@@ -6014,6 +6014,85 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/MoodContent"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbt/services": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "summary": "Queries the offers",
+        "description": "This method is used to query all offers.",
+        "operationId": "GetServiceOffers",
+        "parameters": [
+          {
+            "name": "X-Language",
+            "in": "header",
+            "description": "Language of the content.  Possible values are;\n- EN\n- AR",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Channel",
+            "in": "header",
+            "description": "This parameter is used to track the channel of the request. Possible values are;\n- IVR\n- USSD\n- SMS\n- RBTMobileApp\n- RBTSubscriberPortal\n- MobilyMobileApp\n- MobilyEPortal\n- OTHER",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Username",
+            "in": "header",
+            "description": "User name of the API, log purposes only",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Offers are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Service"
                   }
                 }
               }
@@ -12917,7 +12996,8 @@
           "offerId",
           "offerName",
           "state",
-          "subscriptionId"
+          "subscriptionId",
+          "price"
         ],
         "type": "object",
         "properties": {
@@ -12955,6 +13035,15 @@
             "type": "integer",
             "description": "Remaining usage of subsciption in days",
             "example": 14
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the Service",
+            "example": 5
+          },
+          "defaultContent": {
+            "type": "string",
+            "description": "This field will return:\n- Active Default Tone name for RBT service offer\n- Default Signature for MySignature offer"
           }
         },
         "description": "Subscribed Service"
@@ -13409,6 +13498,54 @@
           }
         },
         "description": "Defined Programmatic Errors."
+      },
+      "Service": {
+        "required": [
+          "chargingPeriod",
+          "description",
+          "id",
+          "name",
+          "price"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the Service",
+            "example": 10001
+          },
+          "name": {
+            "type": "string",
+            "description": "Possible values are:\n- RBT\n- PrayerTimes\n- ProfileService\n- MySignature",
+            "example": "PrayerTimes"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the Service",
+            "example": "PrayerTimes Service Description"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the Service",
+            "example": 5
+          },
+          "chargingPeriod": {
+            "type": "string",
+            "description": "Charging period of the Service",
+            "example": "P000Y000M030DT00H00M00S"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "Identifier of the parent Service",
+            "example": 10002
+          },
+          "parentName": {
+            "type": "string",
+            "description": "Possible value is RBT",
+            "example": "RBT"
+          }
+        },
+        "description": "Service"
       },
       "ExtendedToneContent": {
         "required": [
