@@ -13043,7 +13043,7 @@
           },
           "defaultContent": {
             "type": "string",
-            "description": "This field will return:\n- Active Default Tone name for RBT service offer\n- Default Signature for MySignature offer"
+            "description": "This field will return:\n- Active Default Tone name for RBT offer\n- Default Signature for MySignature offer"
           }
         },
         "description": "Subscribed Service"
