@@ -13041,9 +13041,9 @@
             "description": "Price of the Service",
             "example": 5
           },
-          "defaultContent": {
+          "activeDefaultContent": {
             "type": "string",
-            "description": "This field will return:\n- Active Default Tone name for RBT offer\n- Default Signature for MySignature offer"
+            "description": "This field will return:\n- Active Default Tone name for RBT offer\n- Active Default Signature for MySignature offer"
           }
         },
         "description": "Subscribed Service"
