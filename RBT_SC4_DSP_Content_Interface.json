@@ -1776,7 +1776,7 @@
           "Trending"
         ],
         "summary": "Queries trending tones",
-        "description": "This method is used to query trending tones. Tones will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
+        "description": "This method is used to query trending tones. Top N tones (N value is configurable and default value is 10) will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
         "operationId": "queryTrendingTones",
         "parameters": [
           {
@@ -1840,7 +1840,7 @@
           "Trending"
         ],
         "summary": "Queries trending albums",
-        "description": "This method is used to query trending albums. Albums will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
+        "description": "This method is used to query trending albums. Top N albums (N value is configurable and default value is 10) will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
         "operationId": "queryTrendingAlbums",
         "parameters": [
           {
@@ -1904,7 +1904,7 @@
           "Trending"
         ],
         "summary": "Queries trending categories",
-        "description": "This method is used to query trending categories. Categories will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
+        "description": "This method is used to query trending categories. Ton N categories (N value is configurable and default value is 10) will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
         "operationId": "queryTrendingCategories",
         "parameters": [
           {
@@ -1968,7 +1968,7 @@
           "Trending"
         ],
         "summary": "Queries trending moods",
-        "description": "This method is used to query trending moods. Moods will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
+        "description": "This method is used to query trending moods. Ton N moods (N value is configurable and default value is 10) will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
         "operationId": "queryTrendingMoods",
         "parameters": [
           {
