@@ -1065,7 +1065,7 @@
           },
           "defaultContent": {
             "type": "string",
-            "description": "This field will return:\n- Default Tone name for RBT offer\n- Default Signature for MySignature offer"
+            "description": "This field will return:\n- Default Tone identifier for RBT offer\n- Default Signature for MySignature offer"
           }
         }
       },
