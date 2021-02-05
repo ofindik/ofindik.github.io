@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC4 DSP Content Interface",
-    "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 05.02.2021     | v1.1.2   | - periodParam added to the trending methods |",
+    "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 05.02.2021     | v1.1.2   | - period query parameter is added to the trending methods |",
     "version": "v1.1.2"
   },
   "servers": [
@@ -1776,7 +1776,7 @@
           "Trending"
         ],
         "summary": "Queries trending tones",
-        "description": "This method is used to query trending tones. Top 5 tones with more than 100 subscriptions within one week.",
+        "description": "This method is used to query trending tones. Tones will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
         "operationId": "queryTrendingTones",
         "parameters": [
           {
@@ -1840,7 +1840,7 @@
           "Trending"
         ],
         "summary": "Queries trending albums",
-        "description": "This method is used to query trending albums. Top 5 albums with more than 100 subscriptions within one week.",
+        "description": "This method is used to query trending albums. Albums will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
         "operationId": "queryTrendingAlbums",
         "parameters": [
           {
@@ -1904,7 +1904,7 @@
           "Trending"
         ],
         "summary": "Queries trending categories",
-        "description": "This method is used to query trending categories. Top 5 categories with more than 100 subscriptions within one week.",
+        "description": "This method is used to query trending categories. Categories will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
         "operationId": "queryTrendingCategories",
         "parameters": [
           {
@@ -1968,7 +1968,7 @@
           "Trending"
         ],
         "summary": "Queries trending moods",
-        "description": "This method is used to query trending moods. Top 5 moods with more than 100 subscriptions within one week.",
+        "description": "This method is used to query trending moods. Moods will be returned according to the subscription count within the given period. If period parameter is not provided, default value will be All.",
         "operationId": "queryTrendingMoods",
         "parameters": [
           {
