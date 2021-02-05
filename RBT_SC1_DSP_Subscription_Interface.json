@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
-    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |",
-    "version": "v1.2.0"
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |",
+    "version": "v1.2.1"
   },
   "servers": [
     {
@@ -1057,6 +1057,15 @@
             "type": "integer",
             "description": "Remaining usage of subsciption in days",
             "example": 14
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the service offer",
+            "example": "10"
+          },
+          "defaultContent": {
+            "type": "string",
+            "description": "This field will return:\n- Default Tone name for RBT offer\n- Default Signature for MySignature offer"
           }
         }
       },
@@ -1201,6 +1210,11 @@
             "type": "integer",
             "description": "Remaining usage of subsciption in days",
             "example": 14
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the content offer",
+            "example": "5"
           }
         }
       },
@@ -1277,6 +1291,11 @@
             "type": "string",
             "description": "Possible values are:\n  - All\n  - Initial",
             "example": "All"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price of the gift offer",
+            "example": "5"
           }
         }
       },
