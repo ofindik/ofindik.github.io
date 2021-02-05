@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC4 DSP Content Interface",
-    "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.1.1"
+    "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 05.02.2021     | v1.1.2   | - periodParam added to the trending methods |",
+    "version": "v1.1.2"
   },
   "servers": [
     {
@@ -1787,6 +1787,9 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/periodParam"
           }
         ],
         "responses": {
@@ -1848,6 +1851,9 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/periodParam"
           }
         ],
         "responses": {
@@ -1909,6 +1915,9 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/periodParam"
           }
         ],
         "responses": {
@@ -1970,6 +1979,9 @@
           },
           {
             "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/periodParam"
           }
         ],
         "responses": {
@@ -2994,6 +3006,14 @@
         "name": "sort",
         "in": "query",
         "description": "Possible values are;\n  - Name\n  - Popularity\n  - Newest\n  - Oldest",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "periodParam": {
+        "name": "period",
+        "in": "query",
+        "description": "Possible values are;\n  - All\n  - Daily\n  - Weekly\n  - Monthly",
         "schema": {
           "type": "string"
         }
