@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC4 DSP Content Interface",
-    "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 05.02.2021     | v1.1.2   | - period query parameter is added to the trending methods |\n| 15.02.2021     | v1.1.3   | - Price and NumberOfTones values are added to sort query parameter |",
-    "version": "v1.1.3"
+    "description": "This document provides the RESTful content interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 05.02.2021     | v1.1.2   | - period query parameter is added to the trending methods |\n| 15.02.2021     | v1.1.3   | - Price and NumberOfTones values are added to sort query parameter |\n| 15.02.2021     | v1.1.4  | - organizationId and organizationName attributes are added to all content types |",
+    "version": "v1.1.4"
   },
   "servers": [
     {
@@ -2453,6 +2453,8 @@
           "id",
           "name",
           "description",
+          "organizationId",
+          "organizationName",
           "price",
           "subscriptionCode",
           "chargingPeriod",
@@ -2478,6 +2480,16 @@
             "type": "string",
             "description": "Description of the tone",
             "example": "Tone A Description"
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "Identifier of the organization",
+            "example": "9999"
+          },
+          "organizationName": {
+            "type": "string",
+            "description": "Name of the organization",
+            "example": "Organization A"
           },
           "price": {
             "type": "string",
@@ -2563,6 +2575,8 @@
           "id",
           "name",
           "description",
+          "organizationId",
+          "organizationName",
           "price",
           "subscriptionCode",
           "chargingPeriod",
@@ -2587,6 +2601,16 @@
             "type": "string",
             "description": "Description of the album",
             "example": "Album A Description"
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "Identifier of the organization",
+            "example": "9999"
+          },
+          "organizationName": {
+            "type": "string",
+            "description": "Name of the organization",
+            "example": "Organization A"
           },
           "price": {
             "type": "string",
@@ -2660,6 +2684,8 @@
           "id",
           "name",
           "description",
+          "organizationId",
+          "organizationName",
           "price",
           "subscriptionCode",
           "chargingPeriod",
@@ -2684,6 +2710,16 @@
             "type": "string",
             "description": "Description of the artist",
             "example": "Artist A Description"
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "Identifier of the organization",
+            "example": "9999"
+          },
+          "organizationName": {
+            "type": "string",
+            "description": "Name of the organization",
+            "example": "Organization A"
           },
           "price": {
             "type": "string",
@@ -2762,6 +2798,8 @@
           "id",
           "name",
           "description",
+          "organizationId",
+          "organizationName",
           "price",
           "subscriptionCode",
           "chargingPeriod",
@@ -2786,6 +2824,16 @@
             "type": "string",
             "description": "Description of the category",
             "example": "Category A Description"
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "Identifier of the organization",
+            "example": "9999"
+          },
+          "organizationName": {
+            "type": "string",
+            "description": "Name of the organization",
+            "example": "Organization A"
           },
           "price": {
             "type": "string",
@@ -2859,6 +2907,8 @@
           "id",
           "name",
           "description",
+          "organizationId",
+          "organizationName",
           "price",
           "subscriptionCode",
           "chargingPeriod",
@@ -2883,6 +2933,16 @@
             "type": "string",
             "description": "Description of the mood",
             "example": "Mood A Description"
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "Identifier of the organization",
+            "example": "9999"
+          },
+          "organizationName": {
+            "type": "string",
+            "description": "Name of the organization",
+            "example": "Organization A"
           },
           "price": {
             "type": "string",
