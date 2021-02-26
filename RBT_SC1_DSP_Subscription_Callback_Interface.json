@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Callback Interface",
-    "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP SC Gateway. Server of the interface will be RBT Back-End.",
-    "version": "v1.0.4"
+    "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP SC Gateway. Server of the interface will be RBT Back-End.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 26.02.2021     | v1.0.5   | - offerId, offerName, contentId and contentType attibutes are added to the SubscriptionState |",
+    "version": "v1.0.5"
   },
   "servers": [
     {
@@ -290,6 +290,26 @@
             "type": "string",
             "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
             "example": "Inactive"
+          },
+          "offerId": {
+            "type": "string",
+            "description": "Identifier of the service offer",
+            "example": "33"
+          },
+          "offerName": {
+            "type": "string",
+            "description": "Name of the service offer",
+            "example": "RBT"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "Identifier of the content",
+            "example": "10001"
+          },
+          "contentType": {
+            "type": "string",
+            "description": "Possible values are:\n  - Tone\n  - Album\n  - Artist\n  - Category\n  - Mood",
+            "example": "Tone"
           },
           "triggerEvent": {
             "type": "string",
