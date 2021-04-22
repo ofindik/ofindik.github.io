@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
-    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |",
-    "version": "v1.2.2"
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |",
+    "version": "v1.2.3"
   },
   "servers": [
     {
@@ -1084,6 +1084,10 @@
             "type": "string",
             "description": "Possible values are:\n  - EN\n  - AR",
             "example": "EN"
+          },
+          "freeOfCharge": {
+            "type": "boolean",
+            "description": "Flag to enable/disable initial charging. This flag will be used for subscriptions paid with credit card."
           }
         }
       },
@@ -1326,6 +1330,10 @@
             "type": "string",
             "description": "Possible values are:\n  - EN\n  - AR",
             "example": "EN"
+          },
+          "freeOfCharge": {
+            "type": "boolean",
+            "description": "Flag to enable/disable initial charging. This flag will be used for subscriptions paid with credit card."
           },
           "isGift": {
             "type": "boolean",
