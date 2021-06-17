@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
-    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |",
-    "version": "v1.2.3"
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |\n| 17.06.2021     | v1.2.4   | - querySubscriptionsOfServiceOffer method is added |",
+    "version": "v1.2.4"
   },
   "servers": [
     {
@@ -284,6 +284,73 @@
         "responses": {
           "200": {
             "description": "Update Service Offer Subscription Request is Submitted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/v1/serviceOfferSubscriptions/offers/{offerId}": {
+      "get": {
+        "tags": [
+          "Service Offer Subscription"
+        ],
+        "summary": "Queries the service offer subscriptions of an offer",
+        "description": "This method is used to query all service offer subscriptions of an offer identified with {offerId}. Service offer details can be retrieved with methods of SC3.",
+        "operationId": "querySubscriptionsOfServiceOffer",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          },
+          {
+            "$ref": "#/components/parameters/offerIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Offer Subscriptions are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceOfferSubscriptions"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request",
@@ -1469,6 +1536,31 @@
         "required": true,
         "schema": {
           "type": "string"
+        }
+      },
+      "offerIdParam": {
+        "name": "offerId",
+        "in": "path",
+        "description": "Identifier of the offer",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "offsetParam": {
+        "name": "offset",
+        "in": "query",
+        "description": "The number of items to skip before starting to collect the result set",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "limitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "The numbers of items to return",
+        "schema": {
+          "type": "integer"
         }
       },
       "contentIdParam": {
