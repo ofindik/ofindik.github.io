@@ -343,11 +343,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Service Offer Subscriptions are Retrieved",
+            "description": "Basic Service Offer Subscriptions are Retrieved",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ServiceOfferSubscriptions"
+                  "$ref": "#/components/schemas/BasicServiceOfferSubscriptions"
                 }
               }
             }
@@ -1133,6 +1133,42 @@
           "defaultContent": {
             "type": "string",
             "description": "This field will return:\n- Default Tone identifier for RBT offer\n- Default Signature for MySignature offer"
+          }
+        }
+      },
+      "BasicServiceOfferSubscriptions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/BasicServiceOfferSubscription"
+        }
+      },
+      "BasicServiceOfferSubscription": {
+        "required": [
+          "subscriptionId",
+          "msisdn",
+          "state"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "Identifier of the subscription",
+            "example": "10001"
+          },
+          "msisdn": {
+            "type": "string",
+            "description": "MSISDN of the subscription",
+            "example": "966561234567"
+          },
+          "state": {
+            "type": "string",
+            "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
+            "example": "Inactive"
+          },
+          "failureReason": {
+            "type": "string",
+            "description": "Failure reason for the \"Inactive\" state. Possible values are:\n  - SubscriberNotEligible\n  - SubscriberInBlackList\n  - ServiceInactive\n  - RenewalNotConfirmed\n  - OfferInactive\n  - MaxFailedChargingAttemptCountExceeded\n  - InsufficientCredit\n  - SubscriberNotActive\n  - InactivatedBySubscriber\n  - SubscriptionDurationEnded\n  - OfferLastSubscriptionDatePassed\n  - OfferFirstSubscriptionDateNotReached\n  - OfferSuspended\n  - ServiceSuspended\n  - DobNotAllowed\n  - MicroChargingDurationEnds\n  - HlrProvisioningError\n  - ChargingFailure",
+            "example": "InsufficientCredit"
           }
         }
       },
