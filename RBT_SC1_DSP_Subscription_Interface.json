@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
-    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn} instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |\n| 17.06.2021     | v1.2.4   | - GET serviceOfferSubscriptions/offers/{offerId} method is added |",
-    "version": "v1.2.4"
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |",
+    "version": "v1.2.3"
   },
   "servers": [
     {
@@ -284,73 +284,6 @@
         "responses": {
           "200": {
             "description": "Update Service Offer Subscription Request is Submitted"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Not Authorized"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "basic_security": []
-          }
-        ]
-      }
-    },
-    "/rbt/v1/serviceOfferSubscriptions/offers/{offerId}": {
-      "get": {
-        "tags": [
-          "Service Offer Subscription"
-        ],
-        "summary": "Queries the service offer subscriptions of an offer",
-        "description": "This method is used to query all service offer subscriptions of an offer identified with {offerId}. Service offer details can be retrieved with methods of SC3.",
-        "operationId": "querySubscriptionsOfServiceOffer",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/channelParam"
-          },
-          {
-            "$ref": "#/components/parameters/usernameParam"
-          },
-          {
-            "$ref": "#/components/parameters/offsetParam"
-          },
-          {
-            "$ref": "#/components/parameters/limitParam"
-          },
-          {
-            "$ref": "#/components/parameters/offerIdParam"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Basic Service Offer Subscriptions are Retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BasicServiceOfferSubscriptions"
-                }
-              }
-            }
           },
           "400": {
             "description": "Bad Request",
@@ -1136,42 +1069,6 @@
           }
         }
       },
-      "BasicServiceOfferSubscriptions": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/BasicServiceOfferSubscription"
-        }
-      },
-      "BasicServiceOfferSubscription": {
-        "required": [
-          "subscriptionId",
-          "msisdn",
-          "state"
-        ],
-        "type": "object",
-        "properties": {
-          "subscriptionId": {
-            "type": "string",
-            "description": "Identifier of the subscription",
-            "example": "10001"
-          },
-          "msisdn": {
-            "type": "string",
-            "description": "MSISDN of the subscription",
-            "example": "966561234567"
-          },
-          "state": {
-            "type": "string",
-            "description": "Possible values are:\n  - Active\n  - Suspended\n  - Inactive",
-            "example": "Inactive"
-          },
-          "failureReason": {
-            "type": "string",
-            "description": "Failure reason for the \"Inactive\" state. Possible values are:\n  - SubscriberNotEligible\n  - SubscriberInBlackList\n  - ServiceInactive\n  - RenewalNotConfirmed\n  - OfferInactive\n  - MaxFailedChargingAttemptCountExceeded\n  - InsufficientCredit\n  - SubscriberNotActive\n  - InactivatedBySubscriber\n  - SubscriptionDurationEnded\n  - OfferLastSubscriptionDatePassed\n  - OfferFirstSubscriptionDateNotReached\n  - OfferSuspended\n  - ServiceSuspended\n  - DobNotAllowed\n  - MicroChargingDurationEnds\n  - HlrProvisioningError\n  - ChargingFailure",
-            "example": "InsufficientCredit"
-          }
-        }
-      },
       "ServiceOffer": {
         "required": [
           "offerId"
@@ -1572,31 +1469,6 @@
         "required": true,
         "schema": {
           "type": "string"
-        }
-      },
-      "offerIdParam": {
-        "name": "offerId",
-        "in": "path",
-        "description": "Identifier of the offer",
-        "required": true,
-        "schema": {
-          "type": "string"
-        }
-      },
-      "offsetParam": {
-        "name": "offset",
-        "in": "query",
-        "description": "The number of items to skip before starting to collect the result set",
-        "schema": {
-          "type": "integer"
-        }
-      },
-      "limitParam": {
-        "name": "limit",
-        "in": "query",
-        "description": "The numbers of items to return",
-        "schema": {
-          "type": "integer"
         }
       },
       "contentIdParam": {
