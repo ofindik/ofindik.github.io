@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
-    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |",
-    "version": "v1.2.3"
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |\n| 21.06.2021     | v1.2.4   | - New error (1006 - Insufficient credit) is added |",
+    "version": "v1.2.4"
   },
   "servers": [
     {
@@ -1407,7 +1407,7 @@
             "type": "string"
           }
         },
-        "description": "Possible errors:\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 1004 - Subscription does not exist.\n  - 1005 - Subscription already exists.\n  - 9000 - System failure. Details: \"Error detail\"."
+        "description": "Possible errors:\n  - 1001 - Mandatory parameter \"parameter name\" is missing.\n  - 1002 - Parameter \"parameter name\" is not valid.\n  - 1003 - Subscriber does not exist.\n  - 1004 - Subscription does not exist.\n  - 1005 - Subscription already exists.\n  - 1006 - Insufficient credit.\n  - 9000 - System failure. Details: \"Error detail\"."
       }
     },
     "parameters": {
