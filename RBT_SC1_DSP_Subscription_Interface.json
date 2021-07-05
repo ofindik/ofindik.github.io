@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
-    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |\n| 21.06.2021     | v1.2.4   | - New error (1006 - Insufficient credit) is added |",
-    "version": "v1.2.4"
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |\n| 21.06.2021     | v1.2.4   | - New error (1006 - Insufficient credit) is added |\n| 05.07.2021     | v1.2.5   | - X-Language header is added to the following methods<br/> -- PUT serviceOfferSubscriptions<br/> -- PUT contentOfferSubscriptions<br/> -- DELETE contentOfferFollowings<br/> -- PUT confirmations<br/> -- GET campaigns/eligibility<br/> -- PUT campaigns/eligibility |",
+    "version": "v1.2.5"
   },
   "servers": [
     {
@@ -260,6 +260,9 @@
             "$ref": "#/components/parameters/msisdnParam"
           },
           {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
             "$ref": "#/components/parameters/channelParam"
           },
           {
@@ -467,6 +470,9 @@
           },
           {
             "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/languageParam"
           },
           {
             "$ref": "#/components/parameters/channelParam"
@@ -743,6 +749,9 @@
             "$ref": "#/components/parameters/msisdnParam"
           },
           {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
             "$ref": "#/components/parameters/channelParam"
           },
           {
@@ -815,6 +824,9 @@
             "$ref": "#/components/parameters/msisdnParam"
           },
           {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
             "$ref": "#/components/parameters/channelParam"
           },
           {
@@ -884,6 +896,9 @@
             "$ref": "#/components/parameters/msisdnParam"
           },
           {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
             "$ref": "#/components/parameters/channelParam"
           },
           {
@@ -947,6 +962,9 @@
           },
           {
             "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/languageParam"
           },
           {
             "$ref": "#/components/parameters/channelParam"
