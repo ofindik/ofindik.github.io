@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Callback Interface",
-    "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP SC Gateway. Server of the interface will be RBT Back-End.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 26.02.2021     | v1.0.5   | - offerId, offerName, contentId and contentType attibutes are added to the SubscriptionState |",
-    "version": "v1.0.5"
+    "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP SC Gateway. Server of the interface will be RBT Back-End.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 26.02.2021     | v1.0.5   | - offerId, offerName, contentId and contentType attibutes are added to the SubscriptionState |\n| 04.08.2021     | v1.0.6   | - englishFailureMessage, and arabicFailureMessage attibutes are added to the SubscriptionState |",
+    "version": "v1.0.6"
   },
   "servers": [
     {
@@ -320,6 +320,16 @@
             "type": "string",
             "description": "Failure reason for the \"Inactive\" state change. Possible values are:\n  - SubscriberNotEligible\n  - SubscriberInBlackList\n  - ServiceInactive\n  - RenewalNotConfirmed\n  - OfferInactive\n  - MaxFailedChargingAttemptCountExceeded\n  - InsufficientCredit\n  - SubscriberNotActive\n  - InactivatedBySubscriber\n  - SubscriptionDurationEnded\n  - OfferLastSubscriptionDatePassed\n  - OfferFirstSubscriptionDateNotReached\n  - OfferSuspended\n  - ServiceSuspended\n  - DobNotAllowed\n  - MicroChargingDurationEnds\n  - HlrProvisioningError\n  - ChargingFailure",
             "example": "InsufficientCredit"
+          },
+          "englishFailureMessage": {
+            "type": "string",
+            "description": "Failure Message In English",
+            "example": "Your request has failed, please try again later."
+          },
+          "arabicFailureMessage": {
+            "type": "string",
+            "description": "Failure Message In Arabic",
+            "example": "طلبك لم ينجح، الرجاء المحاولة لاحقاً."
           }
         }
       },
