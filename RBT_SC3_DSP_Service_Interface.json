@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC3 DSP Service Interface",
-    "description": "This document provides the RESTful service interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.",
-    "version": "v1.0.1"
+    "description": "This document provides the RESTful service interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 27.09.2021     | v1.0.2   | - displayName parameter is added to the offer methods |",
+    "version": "v1.0.2"
   },
   "servers": [
     {
@@ -170,6 +170,11 @@
             "type": "string",
             "description": "Possible values are:\n  - RBT\n  - PrayerTimes\n  - ProfileService\n  - MySignature",
             "example": "PrayerTimes"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of the offer",
+            "example": "My Athan"
           },
           "description": {
             "type": "string",
