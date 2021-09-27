@@ -155,6 +155,7 @@
         "required": [
           "id",
           "name",
+          "displayName",
           "description",
           "price",
           "chargingPeriod"
