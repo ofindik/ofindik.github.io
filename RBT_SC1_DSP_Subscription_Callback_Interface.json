@@ -237,8 +237,8 @@
         "tags": [
           "Assignment Cleanup Notifications"
         ],
-        "summary": "Sends assignment cleanup notification for a subscriber and a list of tone identifiers. For each tone in the list, all assignments should be deleted, so that default tone of subscriber will be used later on.",
-        "description": "This method is used to send assignment cleanup notification for a subscriber identified with {msisdn}.",
+        "summary": "Sends assignment cleanup notification for a subscriber and a list of tone identifiers.",
+        "description": "This method is used to send assignment cleanup notification for a subscriber identified with {msisdn} and tone identifier list. For each tone in the list, all assignments should be deleted, so that default tone of subscriber will be used later on.",
         "operationId": "sendAssignmentCleanupNotification",
         "parameters": [
           {
