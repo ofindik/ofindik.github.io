@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Callback Interface",
-    "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP SC Gateway. Server of the interface will be RBT Back-End.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 26.02.2021     | v1.0.5   | - offerId, offerName, contentId and contentType attibutes are added to the SubscriptionState |\n| 04.08.2021     | v1.0.6   | - englishFailureMessage, and arabicFailureMessage attibutes are added to the SubscriptionState |",
+    "description": "This document provides the RESTful subscription callback interface specification of RBT. Client of the interface will be DSP SC Gateway. Server of the interface will be RBT Back-End.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 26.02.2021     | v1.0.5   | - offerId, offerName, contentId and contentType attibutes are added to the SubscriptionState |\n| 04.08.2021     | v1.0.6   | - englishFailureMessage, and arabicFailureMessage attibutes are added to the SubscriptionState |\n| 21.10.2021     | v1.0.7   | - PUT assignments/cleanup method added |",
     "version": "v1.0.6"
   },
   "servers": [
@@ -31,7 +31,7 @@
           "RBT App Confirmations"
         ],
         "summary": "Requests the confirmation of a subscriber through RBT Application",
-        "description": "This method is used to request confirmation from a subscriber identified with {san} through RBT Application.",
+        "description": "This method is used to request confirmation from a subscriber identified with {msisdn} through RBT Application.",
         "operationId": "requestAppConfirmationFromUser",
         "parameters": [
           {
@@ -100,7 +100,7 @@
           "RBT App Notifications"
         ],
         "summary": "Sends a notification to a subscriber through RBT Application",
-        "description": "This method is used to send a notification to a subscriber identified with {san} through RBT Application.",
+        "description": "This method is used to send a notification to a subscriber identified with {msisdn} through RBT Application.",
         "operationId": "sendAppNotificationToUser",
         "parameters": [
           {
@@ -169,7 +169,7 @@
           "Subscription State Notifications"
         ],
         "summary": "Sends subscription state notifications for a subscriber",
-        "description": "This method is used to send subscription state notifications for a subscriber identified with {san}.",
+        "description": "This method is used to send subscription state notifications for a subscriber identified with {msisdn}.",
         "operationId": "sendSubscriptionStateNotification",
         "parameters": [
           {
@@ -193,6 +193,75 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/SubscriptionState"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription State Update is Submitted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
+    },
+    "/rbt/confirmations/assignments/cleanup": {
+      "put": {
+        "tags": [
+          "Assignment Cleanup Notifications"
+        ],
+        "summary": "Sends assignment cleanup notification for a subscriber and a list of tone identifiers. For each tone in the list, all assignments should be deleted, so that default tone of subscriber will be used later on.",
+        "description": "This method is used to send assignment cleanup notification for a subscriber identified with {msisdn}.",
+        "operationId": "sendAssignmentCleanupNotification",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/transactionIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToneIdArray"
               }
             }
           }
@@ -331,6 +400,12 @@
             "description": "Failure Message In Arabic",
             "example": "طلبك لم ينجح، الرجاء المحاولة لاحقاً."
           }
+        }
+      },
+      "ToneIdArray": {
+        "type": "array",
+        "items": {
+          "type": "string"
         }
       },
       "Error": {
