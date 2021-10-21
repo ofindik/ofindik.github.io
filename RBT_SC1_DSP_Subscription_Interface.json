@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RBT SC1 DSP Subscription Interface",
-    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |\n| 21.06.2021     | v1.2.4   | - New error (1006 - Insufficient credit) is added |\n| 05.07.2021     | v1.2.5   | - X-Language header is added to the following methods<br/> -- PUT serviceOfferSubscriptions<br/> -- PUT contentOfferSubscriptions<br/> -- DELETE contentOfferFollowings<br/> -- PUT confirmations<br/> -- GET campaigns/eligibility<br/> -- PUT campaigns/eligibility |",
+    "description": "This document provides the RESTful subscription interface specification of RBT. Client of the interface will be RBT Back-End. Server of the interface will be DSP.\n\nRevision History\n\n| Date         | Revision | Description                           |\n|--------------|----------|---------------------------------------|\n| 25.12.2020     | v1.2.0   | - Campaign group added<br/> - Subscriber identifier updated as {msisdn}instead of {san} |\n| 05.02.2021     | v1.2.1   | - price and defaultContent attributes are added |\n| 05.03.2021     | v1.2.2   | - giftState attribute is added |\n| 22.04.2021     | v1.2.3   | - freeOfCharge attribute is added |\n| 21.06.2021     | v1.2.4   | - New error (1006 - Insufficient credit) is added |\n| 05.07.2021     | v1.2.5   | - X-Language header is added to the following methods<br/> -- PUT serviceOfferSubscriptions<br/> -- PUT contentOfferSubscriptions<br/> -- DELETE contentOfferFollowings<br/> -- PUT confirmations<br/> -- GET campaigns/eligibility<br/> -- PUT campaigns/eligibility |\n| 21.10.2021     | v1.2.6   | - GET assignableTones method is added |",
     "version": "v1.2.5"
   },
   "servers": [
@@ -1022,6 +1022,85 @@
           }
         ]
       }
+    },
+    "/rbt/v1/assignableTones": {
+      "get": {
+        "tags": [
+          "Assignable Tone"
+        ],
+        "summary": "Queries the assignable tones. Will return an assignable tone SET that consists of tones both from individual and bundle subscriptions. Only one tone will be in the set even if there are multiple subscriptions defined related with the tone.",
+        "description": "This method is used to query all assignable tones of a subscriber identified with {msisdn}.",
+        "operationId": "queryAssignableTones",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sanParam"
+          },
+          {
+            "$ref": "#/components/parameters/msisdnParam"
+          },
+          {
+            "$ref": "#/components/parameters/languageParam"
+          },
+          {
+            "$ref": "#/components/parameters/channelParam"
+          },
+          {
+            "$ref": "#/components/parameters/usernameParam"
+          },
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          },
+          {
+            "$ref": "#/components/parameters/nameParam"
+          },
+          {
+            "$ref": "#/components/parameters/toneIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assignable Tones are Retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssignableToneArray"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not Authorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basic_security": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -1326,6 +1405,63 @@
           }
         }
       },
+      "AssignableToneArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/AssignableTone"
+        }
+      },
+      "AssignableTone": {
+        "required": [
+          "isUnsubscribable",
+          "subscriptionId",
+          "contentId",
+          "contentName",
+          "subscriptionType"
+        ],
+        "type": "object",
+        "properties": {
+          "isUnsubscribable": {
+            "type": "boolean",
+            "description": "Flag showing the eligibilaty status for unsubscribe operation. Value will be true for tone subscriptions and will be false for others."
+          },
+          "subscriptionId": {
+            "type": "string",
+            "description": "If isUnsubscribable attribute is true, value will be identifier of the subscription. If isUnsubscribable attribute is false, value will be null.",
+            "example": "10002"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "Identifier of the content",
+            "example": "40001"
+          },
+          "contentName": {
+            "type": "string",
+            "description": "Name of the content",
+            "example": "Tone A"
+          },
+          "subscriptionType": {
+            "type": "string",
+            "description": "Possible values are:\n  - Tone\n  - Bundle",
+            "example": "Tone"
+          },
+          "subscriptionStartDate": {
+            "type": "string",
+            "description": "If isUnsubscribable attribute is true, value will be subscription start date in \"ddMMyyyyTHHmm\" format. If isUnsubscribable attribute is false, value will be null.",
+            "example": "22032020T1456"
+          },
+          "remainingUsage": {
+            "type": "integer",
+            "description": "If isUnsubscribable attribute is true, value will be remaining usage of subsciption in days. If isUnsubscribable attribute is false, value will be null.",
+            "example": 14
+          },
+          "price": {
+            "type": "string",
+            "description": "If isUnsubscribable attribute is true, value will be price of the content offer. If isUnsubscribable attribute is false, value will be \"N/A (From Tone Bundle)\" in English or Arabic.",
+            "example": "5"
+          }
+        }
+      },
       "ContentOffer": {
         "required": [
           "contentId",
@@ -1476,6 +1612,38 @@
         "in": "header",
         "description": "This parameter is used to track the API method transaction; log purposes only. It is meaningful for POST and PUT methods; in RBT APIs. Maximum length can be 128 chars.",
         "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "offsetParam": {
+        "name": "offset",
+        "in": "query",
+        "description": "The number of items to skip before starting to collect the result set",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "limitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "The numbers of items to return",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "nameParam": {
+        "name": "name",
+        "in": "query",
+        "description": "Search value to be looked in tone names",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "toneIdParam": {
+        "name": "toneId",
+        "in": "query",
+        "description": "Search value to be looked in tone identifiers",
         "schema": {
           "type": "string"
         }
