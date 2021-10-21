@@ -1423,7 +1423,7 @@
         "properties": {
           "isUnsubscribable": {
             "type": "boolean",
-            "description": "Flag showing the eligibilaty status for unsubscribe operation. Value will be true for tone subscriptions and will be false for others."
+            "description": "Flag showing the eligibility status for unsubscribe operation. Value will be true for tone subscriptions and will be false for others."
           },
           "subscriptionId": {
             "type": "string",
