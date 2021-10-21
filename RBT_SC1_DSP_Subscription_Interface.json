@@ -1028,8 +1028,8 @@
         "tags": [
           "Assignable Tone"
         ],
-        "summary": "Queries the assignable tones. Will return an assignable tone SET that consists of tones both from individual and bundle subscriptions. Only one tone will be in the set even if there are multiple subscriptions defined related with the tone.",
-        "description": "This method is used to query all assignable tones of a subscriber identified with {msisdn}.",
+        "summary": "Queries the assignable tones.",
+        "description": "This method is used to query all assignable tones of a subscriber identified with {msisdn}. Response will be a SET that consists of tones both from individual and bundle subscriptions. Only one tone will be in the set even if there are multiple subscriptions defined related with the tone.",
         "operationId": "queryAssignableTones",
         "parameters": [
           {
